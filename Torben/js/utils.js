@@ -13,6 +13,7 @@ var fino_bank_code = "10020000";
 var fino_bank_secret = "test";
 var fino_bank_username = "apoHackathon1";
 var account = {};
+var balanceWithForecast = {};
 
 // ..
 
@@ -51,9 +52,16 @@ function finoRefreshCallback(data, status) {
     fino_access_token = data["data"]["accessToken"];
 };
 
+function finoRefreshErrorCallback(xhr, status, err) {
+    console.log("Refresh failed: " + status.message);
+    console.log("Trying to log-in again...");
+    finoLogin();
+};
+
 function finoConnectBankAccountCallback(data, status) {
     console.log("Connect bank account status: " + status);
     finoGetBankAccounts();
+    finoGetForecast();
 };
 
 function printBankAccounts(data) {
@@ -62,13 +70,19 @@ function printBankAccounts(data) {
     for (var ind in accounts) {
         console.log("accountId: " + accounts[ind].accountId);
     }
-}
+};
 
 function finoGetBankAccountsCallBack(data, status) {
     console.log("Get bank accounts status: " + status);
     printBankAccounts(data);
     account = data.data.accounts[0];
     console.log("Account set: " + account.accountId);
+};
+
+function finoGetForecastCallBack(data, status) {
+    console.log("Get forecast: " + status);
+    balanceWithForecast = data.data.forecast;
+    console.log(JSON.stringify(balanceWithForecast));
 }
 
 function finoClearCallback(data, status) {
@@ -76,7 +90,7 @@ function finoClearCallback(data, status) {
 };
 
 
-function finoPost(url, data, callback, withAuthorization) {
+function finoPost(url, data, callback, errorCallback, withAuthorization) {
     var addHeaders;
     if (withAuthorization) {
         addHeaders = finoAddHeadersWithAuthorization;
@@ -92,11 +106,12 @@ function finoPost(url, data, callback, withAuthorization) {
         data: JSON.stringify(data),
         contentType: "application/json",
         success: callback,
+        error: errorCallback,
         async: false
     });
 };
 
-function finoGet(url, data, callback, withAuthorization) {
+function finoGet(url, data, callback, errorCallback, withAuthorization) {
     var addHeaders;
     if (withAuthorization) {
         addHeaders = finoAddHeadersWithAuthorization;
@@ -111,6 +126,7 @@ function finoGet(url, data, callback, withAuthorization) {
         data: JSON.stringify(data),
         contentType: "application/json",
         success: callback,
+        error: errorCallback,
         async: false
     });
 };
@@ -125,7 +141,7 @@ function finoRegister() {
 
     var url = fino_base_url + "/users";
 
-    finoPost(url, data, finoRegisterCallback);
+    finoPost(url, data, finoRegisterCallback, null, false);
 };
 
 function finoLogin() {
@@ -136,7 +152,7 @@ function finoLogin() {
 
     var url = fino_base_url + "/auth";
 
-    finoPost(url, data, finoLoginCallback);
+    finoPost(url, data, finoLoginCallback, null, false);
 };
 
 function finoRefreshToken() {
@@ -146,7 +162,7 @@ function finoRefreshToken() {
 
     var url = fino_base_url + "/auth/refresh";
 
-    finoPost(url, data, finoRefreshCallback);
+    finoPost(url, data, finoRefreshCallback, finoRefreshErrorCallback, false);
 };
 
 function finoClear() {
@@ -156,7 +172,7 @@ function finoClear() {
 
     var url = fino_base_url + "/user/clear";
 
-    finoPost(url, data, finoClearCallback, true);
+    finoPost(url, data, finoClearCallback, null, true);
 }
 
 function finoConnectBankAccount() {
@@ -170,13 +186,19 @@ function finoConnectBankAccount() {
 
     var url = fino_base_url + "/user/connector/bank/account";
 
-    finoPost(url, data, finoConnectBankAccountCallback, true);
+    finoPost(url, data, finoConnectBankAccountCallback, finoConnectBankAccountCallback, true);
 };
 
 function finoGetBankAccounts() {
     var url = fino_base_url + "/user/connector/bank/account";
 
-    finoGet(url, null, finoGetBankAccountsCallBack, true);
+    finoGet(url, null, finoGetBankAccountsCallBack, null, true);
+}
+
+function finoGetForecast() {
+    var url = fino_base_url + "/user/intelligence/forecast";
+
+    finoGet(url, null, finoGetForecastCallBack, null, true);
 }
 
 function pushOrAdd(obj, key, val) {
@@ -283,6 +305,51 @@ function getSpendingsPieChartData() {
 
     console.log(JSON.stringify(data));
 
+    return data;
+}
+
+
+function getSpendingsExpensenTable() {
+
+    var spending = getTransactionOverview(account.transactions).spending;
+    var properties = Object.getOwnPropertyNames(spending);
+    console.log(properties.toString());
+
+    var totalSpending = spending.amount;
+
+    var data = {
+        values: [],
+        labels: [],
+        type: 'pie',
+        hoverinfo: 'label+name',
+        textinfo: 'percent'
+    }
+
+    for(var p in properties) {
+        if (properties[p] != "amount") {
+            data.labels.push(properties[p]);
+            data.values.push((spending[properties[p]]));
+        }
+    }
+
+    console.log(JSON.stringify(data));
+
+    return data;
+}
+
+function getAccountBalancePlotData() {
+    var data = [];
+    var t;
+    var y;
+
+    for(i in balanceWithForecast) {
+        y = Number(balanceWithForecast[i].value);
+        t = moment(balanceWithForecast[i].date, "YYYY-MM-DD").valueOf();
+        data.push({
+            t: t,
+            y: y
+        });
+    }
     return data;
 }
 
