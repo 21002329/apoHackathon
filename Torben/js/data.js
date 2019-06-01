@@ -5,6 +5,3 @@ var data = [{
   hoverinfo: 'label+name',
   textinfo: 'percent'
 }];
-
-
-<!-- function to feed pi chart -->
