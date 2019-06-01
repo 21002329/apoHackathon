@@ -173,6 +173,75 @@ function finoGetBankAccounts() {
     finoGet(url, null, finoGetBankAccountsCallBack, true);
 }
 
+function getTransactionOverview(transactions) {
+    var overview = {
+        spending: {
+            amount: 0
+        },
+        earning: {
+            amount: 0
+        }
+    };
+    var spendingCategories = [
+        "insurance",
+        "financing",
+        "rental",
+        "travel",
+        "money investment",
+        "health"
+    ];
+    
+    var earningCategories = [
+        "rental income",
+        "salary",
+        "capital assets"
+    ]
+
+    var trx;
+    var tag = "";
+    var type;
+    var isFixed;
+    var matchedCategory;
+    var amount = 0;
+    for (var i in transactions) {
+        isSpending = false;
+        isFixed = false;
+        matchedCategory = "";
+        trx = transactions[i];
+        amount = trx.amount;
+        // Check spending / earning
+        if (trx.tags.includes("spending")) {
+            type = "spending";
+        } else {
+            type = "earning";
+        }
+        // Add amount
+        overview[type].amount += amount;
+        // Check other tags
+        for (var k in trx.tags) {
+            tag = trx.tags[k];
+            if (spendingCategories.includes(tag) || earningCategories.includes(tag)) {
+                matchedCategory = tag;
+            }
+            if (tag == "fix") {
+                isFixed = true;
+            }
+        }
+        if (matchedCategory != "") {
+            pushOrAdd(overview[type], matchedCategory, amount);
+        } else {
+            pushOrAdd(overview[type], "others", amount);
+        }
+        if (isFixed) {
+            pushOrAdd(overview[type], "fixed", amount);
+        } else {
+            pushOrAdd(overview[type], "non-fixed", amount);
+        }
+    }
+    console.log(JSON.stringify(overview));
+    return overview;
+}
+
 async function finoRefresh() {
     while (true) {
         await sleep(fino_refresh_interval_seconds * 1000);
@@ -180,5 +249,4 @@ async function finoRefresh() {
     }
 };
 
-finoRegister();
 finoRefresh();
