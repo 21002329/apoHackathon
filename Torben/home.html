@@ -36,6 +36,7 @@
     <script type = "text/javascript" src="./js/utils.js"></script>
     <script>
       function doSomething(){
+
         finoRefreshToken();
 		    var minPerc2Invest = 30;
 		    var maxPercFixedCost = 50;
@@ -55,6 +56,31 @@
             x++
         }
 
+        // avg doctors
+        var docs ={
+            header: ['others','travel','health','insurence','rental'],
+            doc: [[420,450,45,220,980],
+            [332,1600,89,260,1200],
+            [520,180,120,450,652],
+            [510,276,210,420,742],
+            [310,870,20,378,520],
+            [467,125,0,255,547]]
+        };
+
+        var avg_doc = Array(docs.header.length).fill(0);
+        var itx = 0;
+        var iter2 = 0;
+        while( itx < docs.header.length ){
+          while(iter2 < 6){
+            avg_doc[itx] += docs.doc[iter2][itx]
+
+            iter2 += 1;
+          }
+          avg_doc[itx] = avg_doc[itx] / (iter2 -1);
+          iter2 = 0;
+          itx += 1;
+        }
+
 
         Plotly.newPlot('Expenses', [data],{
           title: 'Top 5 Expenses',
@@ -70,19 +96,19 @@
         var data_Table_Expenses = [{
           type: 'table',
           header: {
-            values: [["<b>Kategorie</b>"],["<b>%-Anteil</b>"], ["<b>Total</b>"]],
+            values: [["<b>Kategorie</b>"],["<b>%-Anteil</b>"], ["<b>Total</b>"], ["<b>AVG-Arzt</b>"]],
             align: "center",
             line: {width: 0, color: '#FFFFFF'},
             fill: {color: 'rgba(0,0,0,0)'},
-            font: {family: "Arial", size: 12, color: "black"}
+            font: {family: "Arial", size: 18, color: "black"}
           },
           cells: {
-            values: [data_abs_Expensen.labels,data_round,data_abs_round],
+            values: [data_abs_Expensen.labels,data_round,data_abs_round,avg_doc],
             align: "center",
             line: {color: "#FFFFFF", width: 0},
             fill: {color: [[rowEvenColor,rowOddColor,rowEvenColor,
                       rowOddColor,rowEvenColor,rowOddColor]]},
-            font: {family: "Arial", size: 11, color: ["black"]}
+            font: {family: "Arial", size: 16, color: ["black"]}
           }
         }]
 
@@ -265,15 +291,15 @@
 						<button id ="thirdAdvice" type="button"  onclick="openAdvice3()" class="btn btn-primary"><font size="8">&#11147;</font></button>
 						<button id ="thirdAdviceText" type="button"  onclick="openAdvice3()" class="btn btn-primary"></button>
 						<p  id ="thirdAdviceTextFull"> Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten Gewinnbringen anlegen.</p>
-	
+
 					</div>
 					<p id = "riskThirdAdvice">  </p>
 				</div>
-			
+
 			</div>
 
 			<script>
-			
+
 				document.getElementById("firstAdviceText").innerHTML = "Mit Versicherungswechsel Geld sparen";
 				document.getElementById("riskFirstAdvice").innerHTML = "Risk Level 0"
 				document.getElementById("secondAdviceText").innerHTML = "Freies Kapital auf ein Tagesgeldkonto verschieben";
@@ -291,14 +317,14 @@
 					window.location.href = "./advice.html";
 				}
 			</script>
-			
-          
-          
-          </div>	  
+
+
+
+          </div>
 	  </div>
 	</div>
 	</div>
-	  
+
     <script>
       $(document).ready(function(){
         $('#main').hide();
