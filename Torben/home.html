@@ -60,18 +60,20 @@
           title: 'Top 5 Expenses',
           width: document.documentElement.clientWidth * 0.30,
           margin:{l: 10,r: 10,b: 10,t: 50,pad: 10},
+          paper_bgcolor: 'rgba(0,0,0,0)',
+          plot_bgcolor: 'rgba(0,0,0,0)',
           showlegend: false
         }, {showSendToCloud: false});
 
-        var rowEvenColor = "#D9ECF7";
-        var rowOddColor = "white";
+        var rowEvenColor = "#96A9C1";
+        var rowOddColor = 'rgba(0,0,0,0)';
         var data_Table_Expenses = [{
           type: 'table',
           header: {
             values: [["<b>Kategorie</b>"],["<b>%-Anteil</b>"], ["<b>Total</b>"]],
             align: "center",
             line: {width: 0, color: '#FFFFFF'},
-            fill: {color: '#FFFFFF'},
+            fill: {color: 'rgba(0,0,0,0)'},
             font: {family: "Arial", size: 12, color: "black"}
           },
           cells: {
@@ -84,7 +86,11 @@
           }
         }]
 
-        Plotly.plot('Table_Expenses',data_Table_Expenses,{title: 'Top 5 Expenses',width: document.documentElement.clientWidth * 0.33,margin:{l: 5,r: 5,b: 1,t: 80,pad: 10}},{showSendToCloud: false});
+        Plotly.plot('Table_Expenses',data_Table_Expenses,{title: 'Top 5 Expenses',
+                                                          width: document.documentElement.clientWidth * 0.25,margin:{l: 5,r: 5,b: 1,t: 80,pad: 10},
+                                                          paper_bgcolor: 'rgba(0,0,0,0)',
+                                                          plot_bgcolor: 'rgba(0,0,0,0)'},
+                                                        {showSendToCloud: false});
 
 
 					var dateFormat = 'MM DD YYYY';
@@ -209,7 +215,7 @@
       <div id="banner" class="page-header" style="padding: 20px">
         <div class="row">
           <div class="col-lg-8 col-sm-6">
-            <h3 class="display-5">Hello Annika Pauder! Hier die aktuelle Finanzübersicht</h3>
+            <h3 class="display-5">Hello Annika Pauder!<br>Hier die aktuelle Finanzübersicht</h3>
           </div>
 
            <div class="col-lg-4 col-sm-6">
