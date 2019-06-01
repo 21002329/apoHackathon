@@ -37,11 +37,14 @@
     <script>
       function doSomething(){
         finoRefreshToken();
+		    var minPerc2Invest = 30;
+		    var maxPercFixedCost = 50; 
+		
         var data = getSpendingsPieChartData();
 
         Plotly.newPlot('Expenses', [data],{
           title: 'Top 5 Expenses',
-          margin:{l: 1,r: 1,b: 1,t: 50,pad: 0},
+          margin:{l: 50,r: 50,b: 1,t: 50,pad: 5},
           showlegend: false
         }, );
 
@@ -131,9 +134,7 @@
 						chart.config.data.datasets[0].type = type;
 						chart.update();
 					});
-
-
-
+				
         $('#loginButton').hide();
         $('#main').show();
 
@@ -146,8 +147,6 @@
 
 
 <body style="padding-top: 70px">
-
-
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <a class="navbar-brand" href="#">apoBank</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -167,47 +166,56 @@
 
 
 
-    <div id="main" class="container">
-
+<div id="main" class="container">
       <div id="banner" class="page-header" style="padding: 20px">
         <div class="row">
           <div class="col-lg-8 col-sm-6">
-            <h3 class="display-5">Hello Aniker! Das ist deine Finanzübersicht</h3>
+            <h3 class="display-5">Hello Annika Pauder! Hier die aktuelle Finanzübersicht</h3>
           </div>
+
            <div class="col-lg-4 col-sm-6">
               <img class="bannerApoBank" src="./img/banner.png" align="right">
           </div>
         </div>
       </div>
 
-      <div id="dashboard" class="bs-docs-section row col-lg-12 jumbotron">
-        <div class="row">
+      <div id="dashboard" class="bs-docs-section">
+          <div class="bs-component">
+            <div class="row">
+            <div class="col-lg-12">
+            <div class="jumbotron">
+                <h2 class="display-5">Kontostatistiken</h2>
+
+                      <div id="Expenses">
+                          <!-- Plotly chart will be drawn inside this DIV -->
+                      </div>
+
+                      <div id="Table_Expenses">
+                        <!-- Plotly chart will be drawn inside this DIV -->
+                      </div>
+
+                  <hr class="my-3">
+                  <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                  </p>
+            </div>
+            </div>
+          </div>
+
+          <div class="row">
           <div class="col-lg-12">
             <div class="jumbotron">
-              <h2 class="display-5">Kontostatistiken</h2>
-                  <div id="Expenses" class="col-lg-5 col-sm-5">
-                      <!-- Plotly chart will be drawn inside this DIV -->
+                <h2 class="display-5">Entwicklung der Kontobilanz</h2>
+
+                <canvas id="chart1"></canvas> <!-- Chart will be drawn inside this DIV -->
+
+                        Chart Type:
+                        <select id="type">
+                          <option value="line">Line</option>
+                          <option value="bar">Bar</option>
+                        </select>
+                        <button id="update">update</button>
                   </div>
-
-                  <div id="Table_Expenses" class="col-lg-5 col-sm-5">
-                    <!-- Plotly chart will be drawn inside this DIV -->
-                  </div>
-
-                  <div style="width:1000px">
-					          <canvas id="chart1"></canvas> <!-- Chart will be drawn inside this DIV -->
-				          </div>
-
-                  Chart Type:
-                  <select id="type">
-                    <option value="line">Line</option>
-                    <option value="bar">Bar</option>
-                  </select>
-                  <button id="update">update</button>
-
-              <hr class="my-2">
-              <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-              </p>
             </div>
           </div>
         </div>
@@ -257,10 +265,21 @@
             <p>  </p>
             <div class="alert alert-dismissible alert-warning">
               <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h4 class="alert-heading">Action 1</h4>
-              <p>
-                Arrow
-              </p>
+              <h1 id = "firstAdvice" class="alert-heading"></h1>
+            <script>
+				document.getElementById("firstAdvice").innerHTML = "&#11145;";
+				</script>
+			</div>
+          </div>
+
+          <div class="bs-component">
+            <p>  </p>
+            <div class="alert alert-dismissible alert-warning">
+              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+              <h1 id= "secondAdvice"  class="alert-heading"></h1>
+			  <script>
+				document.getElementById("secondAdvice").innerHTML = "&#11145;";
+				</script>
             </div>
           </div>
 
@@ -268,20 +287,13 @@
             <p>  </p>
             <div class="alert alert-dismissible alert-warning">
               <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h4 class="alert-heading">Action 2</h4>
-              <p > Arrow</p>
-            </div>
+              <h1 id ="thirdAdvice" class="alert-heading"></h1>
+			<script>
+				
+			</script>
+			</div>
           </div>
-
-          <div class="bs-component">
-            <p>  </p>
-            <div class="alert alert-dismissible alert-warning">
-              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h4 class="alert-heading">Action 3</h4>
-              <p >Arrow</p>
-            </div>
-          </div>
-
+			
       </div>
       </div>
 
