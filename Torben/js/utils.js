@@ -297,6 +297,35 @@ function getSpendingsPieChartData() {
     return data;
 }
 
+
+function getSpendingsExpensenTable() {
+
+    var spending = getTransactionOverview(account.transactions).spending;
+    var properties = Object.getOwnPropertyNames(spending);
+    console.log(properties.toString());
+
+    var totalSpending = spending.amount;
+
+    var data = {
+        values: [],
+        labels: [],
+        type: 'pie',
+        hoverinfo: 'label+name',
+        textinfo: 'percent'
+    }
+
+    for(var p in properties) {
+        if (properties[p] != "amount") {
+            data.labels.push(properties[p]);
+            data.values.push((spending[properties[p]]));
+        }
+    }
+
+    console.log(JSON.stringify(data));
+
+    return data;
+}
+
 function getAccountBalancePlotData() {
     var data = [];
     var t;
