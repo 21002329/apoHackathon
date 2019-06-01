@@ -67,9 +67,6 @@ function finoConnectBankAccountCallback(data, status) {
 function printBankAccounts(data) {
     console.log("Bank Accounts:");
     var accounts = data.data.accounts
-    for (var ind in accounts) {
-        console.log("accountId: " + accounts[ind].accountId);
-    }
 };
 
 function finoGetBankAccountsCallBack(data, status) {
@@ -82,7 +79,6 @@ function finoGetBankAccountsCallBack(data, status) {
 function finoGetForecastCallBack(data, status) {
     console.log("Get forecast: " + status);
     balanceWithForecast = data.data.forecast;
-    console.log(JSON.stringify(balanceWithForecast));
 }
 
 function finoClearCallback(data, status) {
@@ -242,6 +238,10 @@ function getTransactionOverview(transactions) {
     var matchedCategory;
     var amount = 0;
     for (var i in transactions) {
+        if (transactions[i].bookingDate < moment("2019-05-01", "YYYY-MM-DD").valueOf()/1000) {
+            continue;
+        }
+
         isSpending = false;
         isFixed = false;
         matchedCategory = "";
@@ -270,13 +270,7 @@ function getTransactionOverview(transactions) {
         } else {
             pushOrAdd(overview[type], "others", amount);
         }
-        // if (isFixed) {
-        //     pushOrAdd(overview[type], "fixed", amount);
-        // } else {
-        //     pushOrAdd(overview[type], "non-fixed", amount);
-        // }
     }
-    console.log(JSON.stringify(overview));
     return overview;
 }
 
@@ -284,8 +278,6 @@ function getSpendingsPieChartData() {
 
     var spending = getTransactionOverview(account.transactions).spending;
     var properties = Object.getOwnPropertyNames(spending);
-    console.log(properties.toString());
-
     var totalSpending = spending.amount;
 
     var data = {
@@ -302,9 +294,6 @@ function getSpendingsPieChartData() {
             data.values.push((spending[properties[p]] / totalSpending) * 100);
         }
     }
-
-    console.log(JSON.stringify(data));
-
     return data;
 }
 
