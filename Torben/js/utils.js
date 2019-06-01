@@ -1,7 +1,7 @@
 // fino API
 
-var user_email = "avaloq1ww9@fino.digital";
-var user_password = "Demwo1234!";
+var user_email = "avaloq122@fino.digital";
+var user_password = "Demo1234!";
 var redirect_uri = "";
 var fino_base_url = "https://blacklayer.test.fino.cloud/api/fino";
 var fino_client_id = "fino_api";
@@ -10,8 +10,8 @@ var fino_access_token = "";
 var fino_refresh_token = "";
 var fino_refresh_interval_seconds = 15;
 var fino_bank_code = "10020000";
-var fino_bank_secret = "demoaccount1";
-var fino_bank_username = "demoaccount";
+var fino_bank_secret = "test";
+var fino_bank_username = "apoHackathon1";
 var account = {};
 
 // ..
@@ -66,6 +66,7 @@ function printBankAccounts(data) {
 
 function finoGetBankAccountsCallBack(data, status) {
     console.log("Get bank accounts status: " + status);
+    printBankAccounts(data);
     account = data.data.accounts[0];
     console.log("Account set: " + account.accountId);
 }
