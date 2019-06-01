@@ -13,6 +13,20 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
 
+
+    <!-- timesheet -->
+      <style>
+        canvas {
+          -moz-user-select: none;
+          -webkit-user-select: none;
+          -ms-user-select: none;
+        }
+      </style>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+      <script src="./js/Chart.min.js"></script>
+      <script src="./js/Chart_utils.js"></script>
+
+
     <style>img.bannerApoBank{
       max-width:80%;
       max-height:80%;
@@ -31,6 +45,95 @@
           showlegend: false
         }, );
 
+
+          //var forcasts = finoGetForcast();
+					var dateFormat = 'MM DD YYYY';
+					function randomNumber(min, max) {
+						return Math.random() * (max - min) + min;
+					}
+
+					function randomBar(date, lastClose) {
+						var open = randomNumber(lastClose * 0.95, lastClose * 1.05).toFixed(2);
+						var close = randomNumber(open * 0.95, open * 1.05).toFixed(2);
+						return {
+							t: date.valueOf(),
+							y: close
+						};
+					}
+
+					var date = moment('April 01 2017', dateFormat);
+					var data = [randomBar(date, 30)];
+					while (data.length < 60) {
+						date = date.clone().add(1, 'd');
+						if (date.isoWeekday() <= 5) {
+							data.push(randomBar(date, data[data.length - 1].y));
+						}
+					}
+					console.log(data);
+					var ctx = document.getElementById('chart1').getContext('2d');
+					ctx.canvas.width = 1000;
+					ctx.canvas.height = 300;
+
+					var color = Chart.helpers.color;
+					var cfg = {
+						type: 'bar',
+						data: {
+							datasets: [{
+								label: 'My Account Balance and Forcast',
+								backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
+								borderColor: window.chartColors.green,
+								data: data,
+								type: 'line',
+								pointRadius: 0,
+								fill: false,
+								lineTension: 0,
+								borderWidth: 2
+							}]
+						},
+						options: {
+							scales: {
+								xAxes: [{
+									type: 'time',
+									distribution: 'series',
+									ticks: {
+										source: 'data',
+										autoSkip: true
+									}
+								}],
+								yAxes: [{
+									scaleLabel: {
+										display: true,
+										labelString: 'Amount in €'
+									}
+								}]
+							},
+							tooltips: {
+								intersect: false,
+								mode: 'index',
+								callbacks: {
+									label: function(tooltipItem, myData) {
+										var label = myData.datasets[tooltipItem.datasetIndex].label || '';
+										if (label) {
+											label += ': ';
+										}
+										label += parseFloat(tooltipItem.value).toFixed(2);
+										return label;
+									}
+								}
+							}
+						}
+					};
+
+					var chart = new Chart(ctx, cfg);
+
+					document.getElementById('update').addEventListener('click', function() {
+						var type = document.getElementById('type').value;
+						chart.config.data.datasets[0].type = type;
+						chart.update();
+					});
+
+
+
         $('#loginButton').hide();
         $('#main').show();
 
@@ -42,7 +145,7 @@
 
 
 
-  <body style="padding-top: 70px">
+<body style="padding-top: 70px">
 
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
@@ -59,18 +162,10 @@
         </ul>
 
         <button id="loginButton" class="btn btn-secondary my-2 my-sm-0" type="button" onclick="doSomething()">Login</button>
-
-        <!--
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
       </div>
     </nav>
 
-    <!-- <div id="bannerApoBank" style="padding-top: 70px">
-      <img class="bannerApoBank" src="./img/banner.png" align="middle">
-    </div> -->
+
 
     <div id="main" class="container">
 
@@ -90,8 +185,25 @@
           <div class="col-lg-12">
             <div class="jumbotron">
               <h2 class="display-5">Kontostatistiken</h2>
-                  <div id="Expenses" class="col-lg-5 col-sm-5"><!-- Plotly chart will be drawn inside this DIV --></div>
-                  <div id="Table_Expenses" class="col-lg-5 col-sm-5"><!-- Plotly chart will be drawn inside this DIV --></div>
+                  <div id="Expenses" class="col-lg-5 col-sm-5">
+                      <!-- Plotly chart will be drawn inside this DIV -->
+                  </div>
+
+                  <div id="Table_Expenses" class="col-lg-5 col-sm-5">
+                    <!-- Plotly chart will be drawn inside this DIV -->
+                  </div>
+
+                  <div style="width:1000px">
+					          <canvas id="chart1"></canvas> <!-- Chart will be drawn inside this DIV -->
+				          </div>
+
+                  Chart Type:
+                  <select id="type">
+                    <option value="line">Line</option>
+                    <option value="bar">Bar</option>
+                  </select>
+                  <button id="update">update</button>
+
               <hr class="my-2">
               <p class="lead">
                 <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
