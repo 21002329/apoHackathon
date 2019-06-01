@@ -1,6 +1,6 @@
 // fino API
 
-var user_email = "avaloq100@fino.digital";
+var user_email = "avaloq117@fino.digital";
 var user_password = "Demo1234!";
 var redirect_uri = "";
 var fino_base_url = "https://blacklayer.test.fino.cloud/api/fino";
@@ -90,7 +90,8 @@ function finoPost(url, data, callback, withAuthorization) {
         processData: false,
         data: JSON.stringify(data),
         contentType: "application/json",
-        success: callback
+        success: callback,
+        async: false
     });
 };
 
@@ -108,7 +109,8 @@ function finoGet(url, data, callback, withAuthorization) {
         processData: false,
         data: JSON.stringify(data),
         contentType: "application/json",
-        success: callback
+        success: callback,
+        async: false
     });
 };
 
@@ -174,6 +176,16 @@ function finoGetBankAccounts() {
     var url = fino_base_url + "/user/connector/bank/account";
 
     finoGet(url, null, finoGetBankAccountsCallBack, true);
+}
+
+function pushOrAdd(obj, key, val) {
+    // push
+    if(obj[key] == null) {
+        obj[key] = val;
+    // add
+    } else {
+        obj[key] += val;
+    }
 }
 
 function getTransactionOverview(transactions) {
