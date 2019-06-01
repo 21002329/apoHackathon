@@ -1,5 +1,10 @@
 var data = [{
-  values: [19, 26, 55],
-  labels: ['Residential', 'Non-Residential', 'Utility'],
-  type: 'pie'
+  values: [30, 40, 30],
+  labels: ['Rental', 'Food', 'Insurence'],
+  type: 'pie',
+  hoverinfo: 'label+name',
+  textinfo: 'percent'
 }];
+
+
+<!-- function to feed pi chart -->

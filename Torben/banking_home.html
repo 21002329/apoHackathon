@@ -55,7 +55,19 @@
               <h1 class="display-3">Balance Overview</h1>
               <p class="lead">Diagramms with some visual overview</p>
                   <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
-                  <script>Plotly.newPlot('myDiv', data, {}, {showSendToCloud:true});</script>
+                  <script>Plotly.newPlot('myDiv', data,{
+                                                          title: 'Top 5 Expenses',
+                                                          xaxis: {
+                                                            title: 'Year',
+                                                            showgrid: false,
+                                                            zeroline: false
+                                                          },
+                                                          yaxis: {
+                                                            title: 'Percent',
+                                                            showline: false
+                                                          }
+                                                        }, );
+                  </script>
 
 
 
@@ -73,10 +85,9 @@
 
     <div id="user_action">
     <div class="row">
-      <div class="col-sm-5 col-md-5">
+      <div class="col-sm-6">
       <div class="container">
 
-        <div class="row">
           <div class="bs-component">
             <p>  </p>
             <div class="alert alert-dismissible alert-warning">
@@ -85,33 +96,32 @@
               <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
             </div>
           </div>
-        </div>
 
-        <div class="row">
-
+          <div class="bs-component">
+            <p>  </p>
             <div class="alert alert-dismissible alert-warning">
               <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
               <h4 class="alert-heading">Warning!</h4>
               <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
             </div>
-        </div>
+          </div>
 
-        <div class="row">
+          <div class="bs-component">
+            <p>  </p>
             <div class="alert alert-dismissible alert-warning">
               <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
               <h4 class="alert-heading">Warning!</h4>
               <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
             </div>
-        </div>
+          </div>
 
       </div>
       </div>
 
 
-      <div class="col-md-5 col-sm-5">
+      <div class="col-md-4">
       <div class="container">
 
-        <div class="row">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
               <div class="card-header">Header</div>
               <div class="card-body">
@@ -119,9 +129,7 @@
                 <p class="card-text">Some quick example text</p>
               </div>
             </div>
-        </div>
 
-        <div class="row">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
               <div class="card-header">Header</div>
               <div class="card-body">
@@ -129,9 +137,7 @@
                 <p class="card-text">Some quick example text</p>
               </div>
             </div>
-        </div>
 
-        <div class="row">
             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
               <div class="card-header">Header</div>
               <div class="card-body">
@@ -139,7 +145,6 @@
                 <p class="card-text">Some quick example text.</p>
               </div>
             </div>
-        </div>
 
       </div>
       </div>
