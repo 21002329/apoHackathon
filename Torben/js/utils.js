@@ -208,7 +208,7 @@ function getTransactionOverview(transactions) {
         isFixed = false;
         matchedCategory = "";
         trx = transactions[i];
-        amount = trx.amount;
+        amount = Math.abs(Number(trx.amount));
         // Check spending / earning
         if (trx.tags.includes("spending")) {
             type = "spending";
@@ -232,14 +232,41 @@ function getTransactionOverview(transactions) {
         } else {
             pushOrAdd(overview[type], "others", amount);
         }
-        if (isFixed) {
-            pushOrAdd(overview[type], "fixed", amount);
-        } else {
-            pushOrAdd(overview[type], "non-fixed", amount);
-        }
+        // if (isFixed) {
+        //     pushOrAdd(overview[type], "fixed", amount);
+        // } else {
+        //     pushOrAdd(overview[type], "non-fixed", amount);
+        // }
     }
     console.log(JSON.stringify(overview));
     return overview;
+}
+
+function getSpendingsPieChartData(transactions) {
+    var spending = getTransactionOverview(transactions).spending;
+    var properties = Object.getOwnPropertyNames(spending);
+    console.log(properties.toString());
+
+    var totalSpending = spending.amount;
+
+    var data = {
+        values: [],
+        labels: [],
+        type: 'pie',
+        hoverinfo: 'label+name',
+        textinfo: 'percent'
+    }
+
+    for(var p in properties) {
+        if (properties[p] != "amount") {
+            data.labels.push(properties[p]);
+            data.values.push((spending[properties[p]] / totalSpending) * 100);
+        }
+    }
+
+    console.log(JSON.stringify(data));
+
+    return data;
 }
 
 async function finoRefresh() {
