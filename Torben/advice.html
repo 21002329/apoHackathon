@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Numeric JS -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+
+	<style>img.bannerApoBank{
+      max-width:80%;
+      max-height:80%;
+    }</style>
+	
+	<style>img.roadstart{
+      max-width:160%;
+      max-height:160%;
+    }</style>
+
+	<!-- https://www.apobank.de/geldanlage-vermoegen/vermoegen/online-depot.html -->
+<title>apoBank Hackathon</title>
+ </head>
+<body style="padding-top: 70px">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">apoBank</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="./home.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+	<div id="main" class="container">
+      <div id="banner" class="page-header" style="padding: 20px">
+        <div class="row">
+          <div class="col-lg-8 col-sm-6">
+            <h3 class="display-5">Hello Annika Pauder! Hier beginnt deine Reise des Vermögensaufbaus</h3>
+          </div>
+
+           <div class="col-lg-4 col-sm-6">
+              <img class="bannerApoBank" src="./img/banner.png" align="right">
+          </div>
+		</div>
+		<div class="row">
+
+		  <div class="col-lg-4 col-sm-6">
+              <img id= "roadpic" class="roadstart" src="./img/roadstart.jpg" align="right">
+          </div>
+		  <div id="content" class="col-lg-4 col-sm-6">
+             <h5 class="display-5">Vor jeder Reise muss es leider auch ein wenig Arbeit geben. Im Moment haben Sie noch kein Depot bei uns. Bitte folgen sie dem Link </h5>
+			 <a href="https://www.apobank.de/geldanlage-vermoegen/vermoegen/online-depot.html ">Depot eröffnen</a>
+			 <h5 class="display-5">und klicken Sie dann auf weiter.</h5>
+			 
+          </div>
+		</div>
+		<div class="btn-group">
+			<button id ="wohin" type="button"  onclick="openGeldanlage()" class="btn btn-primary"><font size="5">Wo soll diese Reise hin gehen?</font></button>
+			<button id ="weiter" type="button"  onclick="weiter()" class="btn btn-primary"><font size="5">Weiter</font></button>
+		</div>
+      </div>
+		<script>
+			function openGeldanlage(){
+				window.location.href = "https://www.apobank.de/geldanlage-vermoegen/geldanlage.html";
+			}
+			
+			function weiter(){
+				var content = document. getElementById("content");
+				content. parentNode. removeChild(content);
+				var roadpic = document. getElementById("roadpic");
+				roadpic. parentNode. removeChild(roadpic);
+			
+			}
+		</script>
+	</div>

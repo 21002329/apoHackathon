@@ -220,88 +220,65 @@
           </div>
         </div>
       </div>
-
-
-    <div id="user_action">
-    <div class="row">
-      <div class="col-sm-6">
       <div class="container">
+			<div class="btn-group-vertical">
+				<div class="btn-group-vertical">
+					<div class="btn-group">
+						<button id = "firstAdvice" type="button" class="btn btn-primary" onclick="openAdvice1()"><font size="8">&#11146;</font></button>
+						<button id = "firstAdviceText" type="button" class="btn btn-primary" onclick="openAdvice1()"></button>
+						<p  id ="firstAdviceTextFull"> Sie bezahlen mehr für Ihre Versicherungen als die Vergleichsgruppe von Personen mit Ihrem Beruf aus Ihrer Gegend. Klicken Sie auf den Pfeil um einen Termin mit einem unserer Berater einen Termin zu vereinbaren.</p>
+					</div>
+					<p id = "riskFirstAdvice">  </p>
+				</div>
+				<div class="btn-group-vertical">
 
-          <div class="bs-component">
-            <p>  </p>
-            <div class="alert alert-dismissible alert-warning">
-              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h4 class="alert-heading">Warning!</h4>
-              <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
-            </div>
-          </div>
+					<div class="btn-group">
+						<button id= "secondAdvice"  type="button"  onclick="openAdvice2()" class="btn btn-primary"><font size="8">&#11147;</font></button>
+						<button id= "secondAdviceText"  type="button"  onclick="openAdvice2()" class="btn btn-primary"></button>
+						<p  id ="secondAdviceTextFull">Sie können Ihre freies Kapital auf ein Tagesgeldkonto verschieben.</p>
+					</div>
+					<p id = "riskSecondAdvice">  </p>
 
-          <div class="bs-component">
-            <p>  </p>
-            <div class="alert alert-dismissible alert-warning">
-              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h4 class="alert-heading">Warning!</h4>
-              <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
-            </div>
-          </div>
+				</div>
+				<div class="btn-group-vertical">
 
-          <div class="bs-component">
-            <p>  </p>
-            <div class="alert alert-dismissible alert-warning">
-              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h4 class="alert-heading">Warning!</h4>
-              <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
-            </div>
-          </div>
-
-      </div>
-      </div>
-
-
-      <div class="col-md-4">
-      <div class="container">
-
-          <div class="bs-component">
-            <p>  </p>
-            <div class="alert alert-dismissible alert-warning">
-              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h1 id = "firstAdvice" class="alert-heading"></h1>
-            <script>
-				document.getElementById("firstAdvice").innerHTML = "&#11145;";
-				</script>
-			</div>
-          </div>
-
-          <div class="bs-component">
-            <p>  </p>
-            <div class="alert alert-dismissible alert-warning">
-              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h1 id= "secondAdvice"  class="alert-heading"></h1>
-			  <script>
-				document.getElementById("secondAdvice").innerHTML = "&#11145;";
-				</script>
-            </div>
-          </div>
-
-          <div class="bs-component">
-            <p>  </p>
-            <div class="alert alert-dismissible alert-warning">
-              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h1 id ="thirdAdvice" class="alert-heading"></h1>
-			<script>
-				
-			</script>
-			</div>
-          </div>
+					<div class="btn-group">
+						<button id ="thirdAdvice" type="button"  onclick="openAdvice3()" class="btn btn-primary"><font size="8">&#11147;</font></button>
+						<button id ="thirdAdviceText" type="button"  onclick="openAdvice3()" class="btn btn-primary"></button>
+						<p  id ="thirdAdviceTextFull"> Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten Gewinnbringen anlegen.</p>
+	
+					</div>
+					<p id = "riskThirdAdvice">  </p>
+				</div>
 			
-      </div>
-      </div>
+			</div>
+			 <script>
+			
+				document.getElementById("firstAdviceText").innerHTML = "Mit Versicherungswechsel Geld sparen";
+				document.getElementById("riskFirstAdvice").innerHTML = "Risk Level 0"
+				document.getElementById("secondAdviceText").innerHTML = "Freies Kapital auf ein Tagesgeldkonto verschieben";
+				document.getElementById("riskSecondAdvice").innerHTML = "Risk Level 1"
+				document.getElementById("thirdAdviceText").innerHTML = "Freies Kapital anlegen.";
+				document.getElementById("riskThirdAdvice").innerHTML = "Risk Level 3"
 
-    </div>
-    </div>
+				function openAdvice1(){
+					window.location.href = "https://www.apobank.de/selbstaendige/versicherung-vorsorge_sel/versicherung_sel.html";
+				}
+				function openAdvice2(){
+					window.location.href = "https://www.apobank.de/angestellte/konto_und_kreditkarten_ang/tagesgeld_ang.html";
+				}
+				function openAdvice3(){
+					window.location.href = "./advice.html";
+				}
+			</script>
+			
+          
+          
+          </div>	  
+	  </div>
 
+    
 
-    </div>
 
     <script>
       $(document).ready(function(){
