@@ -51,6 +51,12 @@ function finoRefreshCallback(data, status) {
     fino_access_token = data["data"]["accessToken"];
 };
 
+function finoRefreshErrorCallback(xhr, status, err) {
+    console.log("Refresh failed: " + status.message);
+    console.log("Trying to log-in again...");
+    finoLogin();
+};
+
 function finoConnectBankAccountCallback(data, status) {
     console.log("Connect bank account status: " + status);
     finoGetBankAccounts();
@@ -62,21 +68,21 @@ function printBankAccounts(data) {
     for (var ind in accounts) {
         console.log("accountId: " + accounts[ind].accountId);
     }
-}
+};
 
 function finoGetBankAccountsCallBack(data, status) {
     console.log("Get bank accounts status: " + status);
     printBankAccounts(data);
     account = data.data.accounts[0];
     console.log("Account set: " + account.accountId);
-}
+};
 
 function finoClearCallback(data, status) {
     console.log("Clear status: " + status);
 };
 
 
-function finoPost(url, data, callback, withAuthorization) {
+function finoPost(url, data, callback, errorCallback, withAuthorization) {
     var addHeaders;
     if (withAuthorization) {
         addHeaders = finoAddHeadersWithAuthorization;
@@ -92,11 +98,12 @@ function finoPost(url, data, callback, withAuthorization) {
         data: JSON.stringify(data),
         contentType: "application/json",
         success: callback,
+        error: errorCallback,
         async: false
     });
 };
 
-function finoGet(url, data, callback, withAuthorization) {
+function finoGet(url, data, callback, errorCallback, withAuthorization) {
     var addHeaders;
     if (withAuthorization) {
         addHeaders = finoAddHeadersWithAuthorization;
@@ -111,6 +118,7 @@ function finoGet(url, data, callback, withAuthorization) {
         data: JSON.stringify(data),
         contentType: "application/json",
         success: callback,
+        error: errorCallback,
         async: false
     });
 };
@@ -125,7 +133,7 @@ function finoRegister() {
 
     var url = fino_base_url + "/users";
 
-    finoPost(url, data, finoRegisterCallback);
+    finoPost(url, data, finoRegisterCallback, null, false);
 };
 
 function finoLogin() {
@@ -136,7 +144,7 @@ function finoLogin() {
 
     var url = fino_base_url + "/auth";
 
-    finoPost(url, data, finoLoginCallback);
+    finoPost(url, data, finoLoginCallback, null, false);
 };
 
 function finoRefreshToken() {
@@ -146,7 +154,7 @@ function finoRefreshToken() {
 
     var url = fino_base_url + "/auth/refresh";
 
-    finoPost(url, data, finoRefreshCallback);
+    finoPost(url, data, finoRefreshCallback, finoRefreshErrorCallback, false);
 };
 
 function finoClear() {
@@ -156,7 +164,7 @@ function finoClear() {
 
     var url = fino_base_url + "/user/clear";
 
-    finoPost(url, data, finoClearCallback, true);
+    finoPost(url, data, finoClearCallback, null, true);
 }
 
 function finoConnectBankAccount() {
@@ -170,13 +178,27 @@ function finoConnectBankAccount() {
 
     var url = fino_base_url + "/user/connector/bank/account";
 
-    finoPost(url, data, finoConnectBankAccountCallback, true);
+    finoPost(url, data, finoConnectBankAccountCallback, finoConnectBankAccountCallback, true);
 };
 
 function finoGetBankAccounts() {
     var url = fino_base_url + "/user/connector/bank/account";
 
-    finoGet(url, null, finoGetBankAccountsCallBack, true);
+    finoGet(url, null, finoGetBankAccountsCallBack, null, true);
+}
+
+function finoGetForecast() {
+    var data = {
+        "bankCode": fino_bank_code,
+        "extraSecret": "",
+        "saveSecret": true,
+        "secret": fino_bank_secret,
+        "username": fino_bank_username
+    }
+
+    var url = fino_base_url + "/user/connector/bank/account";
+
+    finoGet(url, data, finoConnectBankAccountCallback, true);
 }
 
 function pushOrAdd(obj, key, val) {
