@@ -1,6 +1,6 @@
 // fino API
 
-var user_email = "avaloq1@fino.digital";
+var user_email = "avaloq100@fino.digital";
 var user_password = "Demo1234!";
 var redirect_uri = "";
 var fino_base_url = "https://blacklayer.test.fino.cloud/api/fino";
@@ -193,7 +193,7 @@ function getTransactionOverview(transactions) {
         "money investment",
         "health"
     ];
-    
+
     var earningCategories = [
         "rental income",
         "salary",
