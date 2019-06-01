@@ -12,6 +12,7 @@ var fino_refresh_interval_seconds = 15;
 var fino_bank_code = "10020000";
 var fino_bank_secret = "demoaccount1";
 var fino_bank_username = "demoaccount";
+var account = {};
 
 // ..
 
@@ -64,7 +65,9 @@ function printBankAccounts(data) {
 }
 
 function finoGetBankAccountsCallBack(data, status) {
-    printBankAccounts(data);
+    console.log("Get bank accounts status: " + status);
+    account = data.data.accounts[0];
+    console.log("Account set: " + account.accountId);
 }
 
 function finoClearCallback(data, status) {
@@ -242,8 +245,9 @@ function getTransactionOverview(transactions) {
     return overview;
 }
 
-function getSpendingsPieChartData(transactions) {
-    var spending = getTransactionOverview(transactions).spending;
+function getSpendingsPieChartData() {
+
+    var spending = getTransactionOverview(account.transactions).spending;
     var properties = Object.getOwnPropertyNames(spending);
     console.log(properties.toString());
 
