@@ -49,7 +49,6 @@
         }, );
 
 
-          //var forcasts = finoGetForcast();
 					var dateFormat = 'MM DD YYYY';
 					function randomNumber(min, max) {
 						return Math.random() * (max - min) + min;
@@ -57,12 +56,12 @@
 
 					function randomBar(date, lastClose) {
 						var open = randomNumber(lastClose * 0.95, lastClose * 1.05).toFixed(2);
-						var close = randomNumber(open * 0.95, open * 1.05).toFixed(2);
+					  var close = randomNumber(open * 0.95, open * 1.05).toFixed(2);
 						return {
 							t: date.valueOf(),
 							y: close
 						};
-					}
+				 }
 
 					var date = moment('April 01 2017', dateFormat);
 					var data = [randomBar(date, 30)];
@@ -72,7 +71,10 @@
 							data.push(randomBar(date, data[data.length - 1].y));
 						}
 					}
-					console.log(data);
+          console.log(data);
+          temp = getAccountBalancePlotData();
+          console.log(temp);
+
 					var ctx = document.getElementById('chart1').getContext('2d');
 					ctx.canvas.width = 1000;
 					ctx.canvas.height = 300;
@@ -85,7 +87,7 @@
 								label: 'My Account Balance and Forcast',
 								backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
 								borderColor: window.chartColors.green,
-								data: data,
+								data: temp,
 								type: 'line',
 								pointRadius: 0,
 								fill: false,
@@ -98,9 +100,8 @@
 								xAxes: [{
 									type: 'time',
 									distribution: 'series',
-									ticks: {
-										source: 'data',
-										autoSkip: true
+									time: {
+										unit: 'day',
 									}
 								}],
 								yAxes: [{

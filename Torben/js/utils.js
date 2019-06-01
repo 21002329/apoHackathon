@@ -13,6 +13,7 @@ var fino_bank_code = "10020000";
 var fino_bank_secret = "test";
 var fino_bank_username = "apoHackathon1";
 var account = {};
+var balanceWithForecast = {};
 
 // ..
 
@@ -60,6 +61,7 @@ function finoRefreshErrorCallback(xhr, status, err) {
 function finoConnectBankAccountCallback(data, status) {
     console.log("Connect bank account status: " + status);
     finoGetBankAccounts();
+    finoGetForecast();
 };
 
 function printBankAccounts(data) {
@@ -76,6 +78,12 @@ function finoGetBankAccountsCallBack(data, status) {
     account = data.data.accounts[0];
     console.log("Account set: " + account.accountId);
 };
+
+function finoGetForecastCallBack(data, status) {
+    console.log("Get forecast: " + status);
+    balanceWithForecast = data.data.forecast;
+    console.log(JSON.stringify(balanceWithForecast));
+}
 
 function finoClearCallback(data, status) {
     console.log("Clear status: " + status);
@@ -188,17 +196,9 @@ function finoGetBankAccounts() {
 }
 
 function finoGetForecast() {
-    var data = {
-        "bankCode": fino_bank_code,
-        "extraSecret": "",
-        "saveSecret": true,
-        "secret": fino_bank_secret,
-        "username": fino_bank_username
-    }
+    var url = fino_base_url + "/user/intelligence/forecast";
 
-    var url = fino_base_url + "/user/connector/bank/account";
-
-    finoGet(url, data, finoConnectBankAccountCallback, true);
+    finoGet(url, null, finoGetForecastCallBack, null, true);
 }
 
 function pushOrAdd(obj, key, val) {
@@ -305,6 +305,22 @@ function getSpendingsPieChartData() {
 
     console.log(JSON.stringify(data));
 
+    return data;
+}
+
+function getAccountBalancePlotData() {
+    var data = [];
+    var t;
+    var y;
+
+    for(i in balanceWithForecast) {
+        y = Number(balanceWithForecast[i].value);
+        t = moment(balanceWithForecast[i].date, "YYYY-MM-DD").valueOf();
+        data.push({
+            t: t,
+            y: y
+        });
+    }
     return data;
 }
 
