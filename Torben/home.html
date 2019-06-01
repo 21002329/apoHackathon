@@ -37,6 +37,9 @@
     <script>
       function doSomething(){
         finoRegister();
+		var minPerc2Invest = 30;
+		var maxPercFixedCost = 50; 
+		
         var data = getSpendingsPieChartData();
 
         Plotly.newPlot('Expenses', [data],{
@@ -131,9 +134,7 @@
 						chart.config.data.datasets[0].type = type;
 						chart.update();
 					});
-
-
-
+				
         $('#loginButton').hide();
         $('#main').show();
 
@@ -257,10 +258,21 @@
             <p>  </p>
             <div class="alert alert-dismissible alert-warning">
               <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h4 class="alert-heading">Action 1</h4>
-              <p>
-                Arrow
-              </p>
+              <h1 id = "firstAdvice" class="alert-heading"></h1>
+            <script>
+				document.getElementById("firstAdvice").innerHTML = "&#11145;";
+				</script>
+			</div>
+          </div>
+
+          <div class="bs-component">
+            <p>  </p>
+            <div class="alert alert-dismissible alert-warning">
+              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+              <h1 id= "secondAdvice"  class="alert-heading"></h1>
+			  <script>
+				document.getElementById("secondAdvice").innerHTML = "&#11145;";
+				</script>
             </div>
           </div>
 
@@ -268,20 +280,13 @@
             <p>  </p>
             <div class="alert alert-dismissible alert-warning">
               <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h4 class="alert-heading">Action 2</h4>
-              <p > Arrow</p>
-            </div>
+              <h1 id ="thirdAdvice" class="alert-heading"></h1>
+			<script>
+				
+			</script>
+			</div>
           </div>
-
-          <div class="bs-component">
-            <p>  </p>
-            <div class="alert alert-dismissible alert-warning">
-              <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-              <h4 class="alert-heading">Action 3</h4>
-              <p >Arrow</p>
-            </div>
-          </div>
-
+			
       </div>
       </div>
 

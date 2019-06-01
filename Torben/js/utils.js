@@ -1,7 +1,7 @@
 // fino API
 
-var user_email = "avaloq119@fino.digital";
-var user_password = "Demo1234!";
+var user_email = "avaloq1ww9@fino.digital";
+var user_password = "Demwo1234!";
 var redirect_uri = "";
 var fino_base_url = "https://blacklayer.test.fino.cloud/api/fino";
 var fino_client_id = "fino_api";
