@@ -38,15 +38,53 @@
       function doSomething(){
         finoRefreshToken();
 		    var minPerc2Invest = 30;
-		    var maxPercFixedCost = 50; 
-		
+		    var maxPercFixedCost = 50;
+
         var data = getSpendingsPieChartData();
+        var data_round = data.values;
+        var x= 0;
+        while(x < data_round.length){
+            data_round[x] = data_round[x].toFixed(2);
+            x++
+        }
+        var data_abs_Expensen = getSpendingsExpensenTable();
+        var data_abs_round = data_abs_Expensen.values;
+        var x= 0;
+        while(x < data_abs_round.length){
+            data_abs_round[x] = data_abs_round[x].toFixed(2);
+            x++
+        }
+
 
         Plotly.newPlot('Expenses', [data],{
           title: 'Top 5 Expenses',
-          margin:{l: 50,r: 50,b: 1,t: 50,pad: 5},
+          width: document.documentElement.clientWidth * 0.30,
+          margin:{l: 10,r: 10,b: 10,t: 50,pad: 10},
           showlegend: false
-        }, );
+        }, {showSendToCloud: false});
+
+        var rowEvenColor = "#D9ECF7";
+        var rowOddColor = "white";
+        var data_Table_Expenses = [{
+          type: 'table',
+          header: {
+            values: [["<b>Kategorie</b>"],["<b>%-Anteil</b>"], ["<b>Total</b>"]],
+            align: "center",
+            line: {width: 0, color: '#FFFFFF'},
+            fill: {color: '#FFFFFF'},
+            font: {family: "Arial", size: 12, color: "black"}
+          },
+          cells: {
+            values: [data_abs_Expensen.labels,data_round,data_abs_round],
+            align: "center",
+            line: {color: "#FFFFFF", width: 0},
+            fill: {color: [[rowEvenColor,rowOddColor,rowEvenColor,
+                      rowOddColor,rowEvenColor,rowOddColor]]},
+            font: {family: "Arial", size: 11, color: ["black"]}
+          }
+        }]
+
+        Plotly.plot('Table_Expenses',data_Table_Expenses,{title: 'Top 5 Expenses',width: document.documentElement.clientWidth * 0.33,margin:{l: 5,r: 5,b: 1,t: 80,pad: 10}},{showSendToCloud: false});
 
 
 					var dateFormat = 'MM DD YYYY';
@@ -135,7 +173,7 @@
 						chart.config.data.datasets[0].type = type;
 						chart.update();
 					});
-				
+
         $('#loginButton').hide();
         $('#main').show();
 
@@ -182,31 +220,23 @@
 
       <div id="dashboard" class="bs-docs-section">
           <div class="bs-component">
+          <div class="jumbotron">
+          <h2 class="display-5">Kontostatistiken</h2>
             <div class="row">
-            <div class="col-lg-12">
-            <div class="jumbotron">
-                <h2 class="display-5">Kontostatistiken</h2>
-
+                <div class="col-6">
                       <div id="Expenses">
                           <!-- Plotly chart will be drawn inside this DIV -->
                       </div>
-
+                </div>
+                <div class="col-6">
                       <div id="Table_Expenses">
                         <!-- Plotly chart will be drawn inside this DIV -->
                       </div>
-
-                  <hr class="my-3">
-                  <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                  </p>
-            </div>
-            </div>
-          </div>
+              </div>
+              </div>
 
           <div class="row">
-          <div class="col-lg-12">
-            <div class="jumbotron">
-                <h2 class="display-5">Entwicklung der Kontobilanz</h2>
+          <h2 class="display-5">Entwicklung der Kontobilanz</h2>
 
                 <canvas id="chart1"></canvas> <!-- Chart will be drawn inside this DIV -->
 
@@ -216,12 +246,15 @@
                           <option value="bar">Bar</option>
                         </select>
                         <button id="update">update</button>
-                  </div>
-            </div>
-          </div>
+           </div>
+
+           <hr class="my-3">
+                  <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                  </p>
         </div>
       </div>
-
+    </div>
 
     <div id="user_action">
     <div class="row">
@@ -290,11 +323,11 @@
               <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
               <h1 id ="thirdAdvice" class="alert-heading"></h1>
 			<script>
-				
+
 			</script>
 			</div>
           </div>
-			
+
       </div>
       </div>
 
