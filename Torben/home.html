@@ -86,8 +86,12 @@
             [310,870,20,70,520],
             [467,125,0,44,547]]
         };
-
-        var avg_doc = Array(docs.header.length).fill(0);
+		var l_saldo_monthly = Math.round((getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount)*100)/100;
+		var invest = Math.round(l_saldo_monthly*0.3*100)/100;
+		document.getElementById("asset_buy_text").innerHTML = "Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten gewinnbringen anlegen. Sie haben einen monatlichen Überschuss von " + l_saldo_monthly + " €. Wir würden Ihnen empfehlen davon 30% (" + invest +"€)anzulegen." 
+        document.getElementById("moneySet").innerHTML = invest;
+		
+		var avg_doc = Array(docs.header.length).fill(0);
         var itx = 0;
         var iter2 = 0;
         while( itx < docs.header.length ){
@@ -106,7 +110,10 @@
 
 
         Plotly.newPlot('Expenses', [data],{
-          title: 'Top 5 Expenses',
+          title: {
+              text: '<b>Top 5 Expenses',
+              size: 25
+          },
           width: document.documentElement.clientWidth * 0.27,
           margin:{l: 10,r: 10,b: 10,t: 50,pad: 10},
           paper_bgcolor: 'rgba(0,0,0,0)',
@@ -135,8 +142,8 @@
           }
         }]
 
-        Plotly.plot('Table_Expenses',data_Table_Expenses,{width: document.documentElement.clientWidth * 0.27,
-                                                          margin:{l: 5,r: 5,b: 1,t: 20,pad: 10},
+        Plotly.plot('Table_Expenses',data_Table_Expenses,{width: document.documentElement.clientWidth * 0.25,
+                                                          margin:{l: 5,r: 5,b: 1,t: 120,pad: 10},
                                                           paper_bgcolor: 'rgba(0,0,0,0)',
                                                           plot_bgcolor: 'rgba(0,0,0,0)'},
                                                         {showSendToCloud: false});
@@ -329,6 +336,8 @@
           <div class="bs-component">
           <div class="jumbotron">
           <h2 class="display-5">Kontostatistiken</h2>
+          <h4 class="display-6">Girokonto Saldo</h4>
+            <p id="Acc_saldo"></p>
             <div class="row">
                 <div class="col-6">
                       <div id="Expenses">
@@ -338,11 +347,7 @@
                 <div class="col-6">
                       <div id="Table_Expenses">
                         <!-- Plotly chart will be drawn inside this DIV -->
-                      </div>
-
-                      <h3 class="display-5">Kontostand</h3>
-                      <h4 class="display-6">Girokonto Saldo</h4>
-                        <p id="Acc_saldo"></p>
+                  </div>
               </div>
               </div>
         </div>
@@ -504,12 +509,12 @@
 
               <div class="row">
                 <div class="col-sm-1">
-                <a  href="./advice.html">
+                <a >
                   <button id = "secondAdvice" type="button" class="btn btn-primary"><font size="8">&#11146;</font></button>
                 </a>
                 </div>
-                <div class="col-lg-10">
-                   Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten Gewinnbringen anlegen.
+                <div class="col-lg-10" >
+					<p id = "asset_buy_text"> </p>
                    <p align="left">
                      Risk Level 3
                     </p>
