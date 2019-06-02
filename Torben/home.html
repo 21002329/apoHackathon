@@ -96,7 +96,7 @@
 
         Plotly.newPlot('Expenses', [data],{
           title: 'Top 5 Expenses',
-          width: document.documentElement.clientWidth * 0.30,
+          width: document.documentElement.clientWidth * 0.27,
           margin:{l: 10,r: 10,b: 10,t: 50,pad: 10},
           paper_bgcolor: 'rgba(0,0,0,0)',
           plot_bgcolor: 'rgba(0,0,0,0)',
@@ -108,7 +108,7 @@
         var data_Table_Expenses = [{
           type: 'table',
           header: {
-            values: [["<b>Kategorie</b>"],["<b>%-Anteil</b>"], ["<b>Total</b>"], ["<b>AVG-Arzt</b>"]],
+            values: [["Kategorie"],["%-Anteil"], ["Total"], ["AVG-Arzt"]],
             align: "center",
             line: {width: 0, color: '#FFFFFF'},
             fill: {color: 'rgba(0,0,0,0)'},
@@ -120,12 +120,12 @@
             line: {color: "#FFFFFF", width: 0},
             fill: {color: [[rowEvenColor,rowOddColor,rowEvenColor,
                       rowOddColor,rowEvenColor,rowOddColor]]},
-            font: {size: 16, color: "#212529"}
+            font: {size: 14, color: "#212529"}
           }
         }]
 
-        Plotly.plot('Table_Expenses',data_Table_Expenses,{title: 'Top 5 Expenses',
-                                                          width: document.documentElement.clientWidth * 0.25,margin:{l: 5,r: 5,b: 1,t: 80,pad: 10},
+        Plotly.plot('Table_Expenses',data_Table_Expenses,{width: document.documentElement.clientWidth * 0.27,
+                                                          margin:{l: 5,r: 5,b: 1,t: 20,pad: 10},
                                                           paper_bgcolor: 'rgba(0,0,0,0)',
                                                           plot_bgcolor: 'rgba(0,0,0,0)'},
                                                         {showSendToCloud: false});
