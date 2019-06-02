@@ -67,12 +67,12 @@
         // avg doctors
         var docs ={
             header: ['others','travel','health','insurence','rental'],
-            doc: [[420,450,45,220,980],
-            [332,1600,89,260,1200],
-            [520,180,120,450,652],
-            [510,276,210,420,742],
-            [310,870,20,378,520],
-            [467,125,0,255,547]]
+            doc: [[420,450,45,40,980],
+            [332,1600,89,30,1200],
+            [520,180,120,50,652],
+            [510,276,210,77,742],
+            [310,870,20,70,520],
+            [467,125,0,45,547]]
         };
 
         var avg_doc = Array(docs.header.length).fill(0);
@@ -108,7 +108,7 @@
             align: "center",
             line: {width: 0, color: '#FFFFFF'},
             fill: {color: 'rgba(0,0,0,0)'},
-            font: {family: "Arial", size: 18, color: "black"}
+            font: {size: 16, color: "#212529"}
           },
           cells: {
             values: [data_abs_Expensen.labels,data_round,data_abs_round,avg_doc],
@@ -116,7 +116,7 @@
             line: {color: "#FFFFFF", width: 0},
             fill: {color: [[rowEvenColor,rowOddColor,rowEvenColor,
                       rowOddColor,rowEvenColor,rowOddColor]]},
-            font: {family: "Arial", size: 16, color: ["black"]}
+            font: {size: 16, color: "#212529"}
           }
         }]
 
