@@ -279,13 +279,17 @@ function getSpendingsPieChartData() {
     var spending = getTransactionOverview(account.transactions).spending;
     var properties = Object.getOwnPropertyNames(spending);
     var totalSpending = spending.amount;
+	var ultimateColors  = [
+		['rgb(44, 62, 80)', 'rgb(60, 90, 110)', 'rgb(80, 120, 140)', 'rgb(100, 155, 180)', 'rgb(125, 190, 220)']
+	];
 
     var data = {
         values: [],
         labels: [],
         type: 'pie',
         hoverinfo: 'label+name',
-        textinfo: 'percent'
+        textinfo: 'percent',
+		marker: {colors: ultimateColors[0]}
     }
 
     for(var p in properties) {
