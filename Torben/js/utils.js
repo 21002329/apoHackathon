@@ -353,4 +353,27 @@ async function finoRefresh() {
     }
 };
 
+function updateProgress() {
+    
+    var checkboxes = [
+        "#check1",
+        "#check2",
+        "#check3",
+        "#check4",
+        "#check5",
+    ]
+
+    var progress = 0;
+
+    for (var i in checkboxes) {
+        if ($(checkboxes[i]).prop("checked")) {
+            progress += (1/checkboxes.length) * 100;
+        }
+    }
+    $("#level")
+        .css("width", progress+"%")
+        .attr("aria-valuenow", progress)
+        .text(progress+"%");    
+}
+
 finoRefresh();
