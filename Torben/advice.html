@@ -48,7 +48,7 @@
           <div class="col-lg-8 col-sm-6">
             <h5 id = "moneyText" class="display-5">Hello Annika Pauder! Bitte verteilen Sie Ihre gewählten</h5>
 			<h5 id = "moneySet" class="display-5">300</h5>
-			<h5 id = "moneySet2" class="display-5">€ </h5>
+			<h5 id = "moneyText2" class="display-5">€ </h5>
           </div>
 			
            <div class="col-lg-4 col-sm-6">
@@ -71,10 +71,7 @@
 			<div class="btn-group">
 				<button id ="down1" type="button"  onclick="sell('content1', '1')" class="btn btn-primary mb-3"><font size="5">-</font></button>
 			</div>
-			
-			<div class="col-lg-4 col-sm-2" >
-				<h4 id = content1>0</h4>
-			</div>
+			<h4 id = content1>0</h4>
 			<div class="btn-group">
 				<button id ="up1" type="button"  onclick="buy('content1', '1')" class="btn btn-primary mb-3"><font size="5">+</font></button>
 			</div>
@@ -92,11 +89,11 @@
               <img class = "assetgraph" src="./img/asset2-graph.jpg" align="right">
 			</div>
 			<div class="btn-group">
-				<button id ="up2" type="button"  onclick="buy('content1')" class="btn btn-primary mb-3"><font size="5">+</font></button>
+				<button id ="down2" type="button"  onclick="sell('content2', '2')" class="btn btn-primary mb-3"><font size="5">-</font></button>
 			</div>
-			<h4 id = content1>0</h4>
+			<h4 id = content2>0</h4>
 			<div class="btn-group">
-				<button id ="down2" type="button"  onclick="sell()" class="btn btn-primary mb-3"><font size="5">-</font></button>
+				<button id ="up2" type="button"  onclick="buy('content2', '2')" class="btn btn-primary mb-3"><font size="5">+</font></button>
 			</div>
 		</div>	
 		<div class="row">
@@ -111,13 +108,12 @@
               <img class = "assetgraph" src="./img/asset3-graph.jpg" align="right">
 			</div>
 			<div class="btn-group">
-			
-				<button id ="up3" type="button"  onclick="buy3()" class="btn btn-primary mb-3"><font size="5">+</font></button>
+				<button id ="down3" type="button"  onclick="sell('content3', '3')" class="btn btn-primary mb-3"><font size="5">-</font></button>
 			</div>
-			<h4 id = content1>0</h4>
+			<h4 id = content3>0</h4>
 			<div class="btn-group">
-				<button id ="down3" type="button"  onclick="sell3()" class="btn btn-primary mb-3"><font size="5">-</font></button>
-			</div>			
+				<button id ="up3" type="button"  onclick="buy('content3', '3')" class="btn btn-primary mb-3"><font size="5">+</font></button>
+			</div>
 		</div>	
 		<div class="row">
 			<div class="card text-white bg-primary mb-3" style="width: 15rem;">
@@ -131,11 +127,11 @@
               <img class = "assetgraph" src="./img/asset4-graph.jpg" align="right">
 			</div>
 			<div class="btn-group">
-				<button id ="up4" type="button"  onclick="buy1()" class="btn btn-primary mb-3"><font size="5">+</font></button>
+				<button id ="down4" type="button"  onclick="sell('content4', '4')" class="btn btn-primary mb-3"><font size="5">-</font></button>
 			</div>
-			<h4 id = content1>0</h4>
+			<h4 id = content4 >0</h4>
 			<div class="btn-group">
-				<button id ="down4" type="button"  onclick="sell1()" class="btn btn-primary mb-3"><font size="5">-</font></button>
+				<button id ="up4" type="button"  onclick="buy('content4', '4')" class="btn btn-primary mb-3"><font size="5">+</font></button>
 			</div>
 		</div>	
 		<div class="row">
@@ -150,11 +146,11 @@
               <img class = "assetgraph" src="./img/asset5-graph.jpg" align="right">
 			</div>
 			<div class="btn-group">
-				<button id ="up5" type="button"  onclick="buy1()" class="btn btn-primary mb-3"><font size="5">+</font></button>
+				<button id ="down2" type="button"  onclick="sell('content5', '5')" class="btn btn-primary mb-3"><font size="5">-</font></button>
 			</div>
-			<h4 id = content1>0</h4>
+			<h4 id = content5>0</h4>
 			<div class="btn-group">
-				<button id ="down5" type="button"  onclick="sell1()" class="btn btn-primary mb-3"><font size="5">-</font></button>
+				<button id ="up2" type="button"  onclick="buy('content5', '5')" class="btn btn-primary mb-3"><font size="5">+</font></button>
 			</div>			
 		</div>	
 		<div class="btn-group">
@@ -170,7 +166,7 @@
 				var content = parseInt(document. getElementById(content2).textContent, 10); 
 				content +=1; 
 				document. getElementById(content2).innerHTML = content; 
-				var money = parseInt(document. getElementById('moneySet').textContent, 10)
+				var money = parseFloat(document. getElementById('moneySet').textContent, 10)
 				if (inter == '1'){
 					money -= 24.97;
 				} else if (inter == '2'){
@@ -182,7 +178,7 @@
 				} else if (inter == '5'){
 					money -= 5.12;
 				}
-				document. getElementById('moneySet').innerHTML = money; 
+				document. getElementById('moneySet').innerHTML = Math.round( money*100)/100; 
 				document. getElementById('moneyText').innerHTML = 'Sie können noch '
 				document. getElementById('moneyText2').innerHTML = ' € verteilen.'
 			};
@@ -191,6 +187,21 @@
 			var content = parseInt(document. getElementById(content2).textContent, 10); 
 				content -=1; 
 				document. getElementById(content2).innerHTML = content; 
+				var money = parseFloat(document. getElementById('moneySet').textContent, 10)
+				if (inter == '1'){
+					money += 24.97;
+				} else if (inter == '2'){
+					money += 35.91;
+				} else if (inter == '3'){
+					money += 100.32;
+				} else if (inter == '4'){
+					money += 62.14;
+				} else if (inter == '5'){
+					money += 5.12;
+				}
+				document. getElementById('moneySet').innerHTML = Math.round( money*100)/100; 
+				document. getElementById('moneyText').innerHTML = 'Sie können noch '
+				document. getElementById('moneyText2').innerHTML = ' € verteilen.'
 		};
 		
 
