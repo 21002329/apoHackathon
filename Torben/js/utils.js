@@ -330,13 +330,17 @@ function getSpendingsExpensenTable() {
     return data;
 }
 
-function getAccountBalancePlotData() {
+function getAccountBalancePlotData(investment) {
     var data1 = [];
     var data2 = [];
     var data3 = [];
     var t;
     var y;
+    var money = 0;
     var delta = 0;
+    if (investment != null) {
+        money = investment;
+    }
 
     for(i in balanceWithForecast) {
         y = Number(balanceWithForecast[i].value);
@@ -348,11 +352,11 @@ function getAccountBalancePlotData() {
         if (balanceWithForecast[i].forecast) {
             data2.push({
                 t: t,
-                y: y + (delta * 200),
+                y: y + (delta * money),
             });
             data3.push({
                 t: t,
-                y: y - (delta * 200),
+                y: y - (delta * money),
             });
             delta += 1;
         }

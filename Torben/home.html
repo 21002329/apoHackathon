@@ -663,9 +663,9 @@
                             <script>
                               function weiter(){
                                 $('#congratzModal').show();
-
-                                var earningsForecast = getAccountBalancePlotData().data2;
-                                var losingsForecast = getAccountBalancePlotData().data3;
+                                var money = parseFloat(document. getElementById('moneySet').textContent, 10);
+                                var earningsForecast = getAccountBalancePlotData(money).data2;
+                                var losingsForecast = getAccountBalancePlotData(money).data3;
                                 chart.data.datasets.push({
                                     label: 'prognostiertes Gesamtvermögen',
                                     backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),
@@ -691,6 +691,7 @@
                                 chart.update();
                                 $('html, body').animate({ scrollTop: 0 }, 'fast');
                               }
+                              
                               function buy( content2, inter) {
                                 var content = parseInt(document. getElementById(content2).textContent, 10);
                                 var money = parseFloat(document. getElementById('moneySet').textContent, 10);
