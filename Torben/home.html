@@ -88,8 +88,16 @@
         };
 		var l_saldo_monthly = Math.round((getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount)*100)/100;
 		var invest = Math.round(l_saldo_monthly*0.3*100)/100;
+		var l_saldo = account.balance;
 		document.getElementById("asset_buy_text").innerHTML = "Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten gewinnbringen anlegen. Sie haben einen monatlichen Überschuss von " + l_saldo_monthly + " €. Wir würden Ihnen empfehlen davon 30% (" + invest +"€)anzulegen." 
         document.getElementById("moneySet").innerHTML = invest;
+		if ( l_saldo >= 3* l_saldo_monthly ){
+			document.getElementById("only_shares").innerHTML="Ihr freies Kapital übersteigt Ihr Einkommen um das 3-fache. Sie könnten 50% davon (" + Math.round(l_saldo*0.5*100)/100+ "€) in Aktion investieren" 
+		} else if ( l_saldo >= 2*l_saldo_monthly){
+			document.getElementById("only_shares").innerHTML= "Ihr freies Kapital übersteigt Ihr Einkommen um über 200%. Sie könnten 25% davon (" + Math.round(l_saldo*0.25*100)/100+ "€) in Aktion investieren"
+		} else {
+			document.getElementById("only_shares").innerHTML= "Ihr freies Kapital liegt unter dem  doppeltem Ihres Monatseinkommens. Um ein wenig mehr Sicherheit vor unvorhersehbare Ereignisse zu bekommen sollten Sie ihr frei verfügbares Kapital erhöhen."
+		}
 		
 		var avg_doc = Array(docs.header.length).fill(0);
         var itx = 0;
@@ -148,7 +156,7 @@
                                                           plot_bgcolor: 'rgba(0,0,0,0)'},
                                                         {showSendToCloud: false});
 
-        var l_saldo = account.balance;
+        
         l_saldo = l_saldo.toFixed(2)
         document.getElementById("Acc_saldo").innerHTML = l_saldo;
 
@@ -467,10 +475,15 @@
                 <button id= "secondAdvice" type="button" class="btn btn-primary"><font size="8">&#11147;</font></button>
               </a>
               </div>
-              <div class="col-lg-10">
-                Sie können Ihre freies Kapital auf ein Tagesgeldkonto verschieben.
-                <p align="left">
-                     Risk Level 1
+              <div  class="col-lg-10">
+                <p id = "only_shares"> </p>
+				<p align="left">
+					
+                     Risk Level 4
+                </p>
+				<p align="left">
+					
+                     Dies wird Sie nur 2 Stunden Ihrer Zeit benötigen.
                 </p>
                   <p align='right'>
                        <button type="button" id="Btn_more_recomm" class="btn btn-secondary" data-toggle="modal" data-target="#myFirstAdvise">Learn more</button>
@@ -522,6 +535,9 @@
                    <p align="left">
                      Risk Level 3
                     </p>
+					<p align="left">
+                     Dies dauert nur 15 Minuten.
+                    </p>
                     <p align='right'>
                          <button type="button" id="Btn_more_recomm" class="btn btn-secondary" data-toggle="modal" data-target="#mySecAdvise">Learn more</button>
                     </p>
@@ -542,19 +558,27 @@
 
                       <!-- Modal body -->
                       <div class="modal-body container">
-
-                            <div class="row">
-                                  <div class="col-lg-8 col-sm-6">
-                                    <h5 id = "moneyText" class="display-5">Hello Annika Pauder! Bitte verteilen Sie Ihre gewählten</h5>
-                              <h5 id = "moneySet" class="display-5">300</h5>
-                              <h5 id = "moneyText2" class="display-5">€ </h5>
-                                  </div>
-
-                                   <div class="col-lg-4 col-sm-6">
-                                      <img class="bannerApoBank" src="./img/banner.png" align="right">
-                                  </div>
-                            </div>
-
+							<div class="row">
+								<div class="row">
+									<div class="col-lg-8 col-sm-6">
+										<h5 id = "moneyText" class="display-5">Hello Annika Pauder! Bitte verteilen Sie Ihre gewählten</h5>
+								<h5 id = "moneySet" class="display-5">300</h5>
+								<h5 id = "moneyText2" class="display-5">€ oder wählen Sie eine der Risiko Varianten aus.</h5>
+									</div>
+	
+									<div class="col-lg-4 col-sm-6">
+										<img class="bannerApoBank" src="./img/banner.png" align="right">
+									</div>
+								</div>
+								<div class="row" >
+									<div class="col-lg-8 col-sm-6">
+										<button id ="own" type="button"  onclick="setAssetNumbers('own')" class="btn btn-primary mb-3">Eigene Auswahl </button>
+										<button id ="low" type="button"  onclick="setAssetNumbers('low')" class="btn btn-primary mb-3">Geringes Risiko </button>
+										<button id ="middle" type="button"  onclick="setAssetNumbers('middle')" class="btn btn-primary mb-3">Moderates Risiko </button>
+										<button id ="high" type="button"  onclick="setAssetNumbers('high')" class="btn btn-primary mb-3">Hohes Risiko </button>
+									</div>
+								</div>
+							 </div>
                             <div class="row">
                               <div class="card text-white bg-primary mb-3" style="width: 15rem;">
                                 <div class="card-header">TecDax</div>
@@ -654,6 +678,41 @@
                             </div>
 
                             <script>
+								function setAssetNumbers(text) {
+									var l_saldo_monthly = Math.round((getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount)*100)/100;
+									var invest = Math.round(l_saldo_monthly*0.3*100)/100;
+									if (text == 'own' ){
+										document. getElementById('content1').innerHTML= 0
+										document. getElementById('content2').innerHTML=0
+										document. getElementById('content3').innerHTML=0
+										document. getElementById('content4').innerHTML=0
+										document. getElementById('content5').innerHTML=0
+										document. getElementById('moneySet').innerHTML =invest
+									} else if (text == 'low' ){
+										document. getElementById('content1').innerHTML=0
+										document. getElementById('content2').innerHTML=0
+										document. getElementById('content3').innerHTML=3
+										document. getElementById('content4').innerHTML=0
+										document. getElementById('content5').innerHTML=0
+										document. getElementById('moneySet').innerHTML =Math.round((invest -3*100.32)*100)/100;
+									} else if (text == 'middle' ){
+										document. getElementById('content1').innerHTML=1 ;
+										document. getElementById('content2').innerHTML=2 ;
+										document. getElementById('content3').innerHTML=2 ;
+										document. getElementById('content4').innerHTML=0 ;
+										document. getElementById('content5').innerHTML=0 ;
+										document. getElementById('moneySet').innerHTML =Math.round((invest -2 * 100.32 - 2*35.91 - 1*24.97)*100)/100;
+									}else {
+										alert('Sind Sie sich sicher, dass Sie ein hohes Risiko bei Ihrer Auswahl auswählen möchten?');
+										document. getElementById('content1').innerHTML=0 ;
+										document. getElementById('content2').innerHTML=0  ;
+										document. getElementById('content3').innerHTML=0  ;
+										document. getElementById('content4').innerHTML=0  ;
+										document. getElementById('content5').innerHTML=59   ;
+										document. getElementById('moneySet').innerHTML =Math.round((invest -59* 5.12)*100)/100;
+									}
+									
+								}
                               function weiter(){
                                 $('#congratzModal').show();
                                 //$('html, body').animate({ scrollTop: 0 }, 'fast');
