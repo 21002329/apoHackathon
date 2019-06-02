@@ -27,6 +27,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
       <script src="./js/Chart.min.js"></script>
       <script src="./js/Chart_utils.js"></script>
+      <!-- <script src="./js/plugin.filler.js"></script> -->
 
 
     <style>
@@ -46,6 +47,8 @@
     <script type = "text/javascript" src="./js/utils.js"></script>
     <script type = "text/javascript" src="./js/utils_checks.js"></script>
     <script>
+        var chart = {};
+        var color = null;
         function closeRecommendation(){
             $('#user_action').hide();
         };
@@ -155,26 +158,29 @@
 
 
           temp = getAccountBalancePlotData();
+          data1 = temp.data1;
+
 
 					var ctx = document.getElementById('chart1').getContext('2d');
 					ctx.canvas.width = 1000;
 					ctx.canvas.height = 300;
 
-					var color = Chart.helpers.color;
+				  color = Chart.helpers.color;
 					var cfg = {
 						type: 'bar',
 						data: {
-							datasets: [{
-								label: 'My Account Balance and Forcast',
-								backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
-								borderColor: window.chartColors.green,
-								data: temp,
+              datasets: [
+              {
+								label: 'Kontosaldo & Extrapolation',
+								backgroundColor: color("#2C3E50").alpha(0.5).rgbString(),
+								borderColor: "#2C3E50",
+								data: data1,
 								type: 'line',
 								pointRadius: 0,
 								fill: false,
 								lineTension: 0,
 								borderWidth: 2
-							}]
+              }]
 						},
 						options: {
 							scales: {
@@ -209,7 +215,7 @@
 						}
 					};
 
-					var chart = new Chart(ctx, cfg);
+					chart = new Chart(ctx, cfg);
 
 					document.getElementById('update').addEventListener('click', function() {
 						var type = document.getElementById('type').value;
@@ -652,7 +658,33 @@
                             <script>
                               function weiter(){
                                 $('#congratzModal').show();
-                                //$('html, body').animate({ scrollTop: 0 }, 'fast');
+
+                                var earningsForecast = getAccountBalancePlotData().data2;
+                                var losingsForecast = getAccountBalancePlotData().data3;
+                                chart.data.datasets.push({
+                                    label: 'prognostiertes Gesamtvermögen',
+                                    backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),
+                                    borderColor: window.chartColors.orange,
+                                    data: earningsForecast,
+                                    type: 'line',
+                                    pointRadius: 0,
+                                    fill: false,
+                                    lineTension: 0,
+                                    borderWidth: 2
+                                });
+                                chart.data.datasets.push({
+                                  label: '',
+                                  backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),
+                                  borderColor: window.chartColors.orange,
+                                  data: losingsForecast,
+                                  type: 'line',
+                                  pointRadius: 0,
+                                  lineTension: 0,
+                                  borderWidth: 2,
+                                  fill: '-1'
+                                });
+                                chart.update();
+                                $('html, body').animate({ scrollTop: 0 }, 'fast');
                               }
                               function buy( content2, inter) {
                                 var content = parseInt(document. getElementById(content2).textContent, 10);

@@ -331,19 +331,34 @@ function getSpendingsExpensenTable() {
 }
 
 function getAccountBalancePlotData() {
-    var data = [];
+    var data1 = [];
+    var data2 = [];
+    var data3 = [];
     var t;
     var y;
+    var delta = 0;
 
     for(i in balanceWithForecast) {
         y = Number(balanceWithForecast[i].value);
         t = moment(balanceWithForecast[i].date, "YYYY-MM-DD").valueOf();
-        data.push({
+        data1.push({
             t: t,
-            y: y
+            y: y,
         });
+        if (balanceWithForecast[i].forecast) {
+            data2.push({
+                t: t,
+                y: y + (delta * 200),
+            });
+            data3.push({
+                t: t,
+                y: y - (delta * 200),
+            });
+            delta += 1;
+        }
     }
-    return data;
+
+    return {data1: data1, data2: data2, data3: data3};
 }
 
 async function finoRefresh() {
