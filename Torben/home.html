@@ -197,6 +197,7 @@
 					});
 
         $('#loginButton').hide();
+        $('#congratz').hide();
         $('#main').show();
 
         //window.location.href = "./banking_home.html";
@@ -240,41 +241,36 @@
         </div>
       </div>
 
-      <div id="congratz" class="bs-docs-section">
-        <div class="bs-component">
-          <div class="jumbotron">
-            <button type="button" class="close" data-dismiss="jumbotron" onclick="closeCongratz()">&times;</button>
-            <h2>Glückwunsch!</h2>
+      <div id="congratz">
+        <div class="container">
+          <div id="achievements" class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert" onclick="closeCongratz()">&times;</button>
             <div class="row">
-              <div class="col-lg-3">
-                  <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <center><strong>Konten Anbinden</strong></center>
-                  </div>
+              <div class="col-lg-2">
+                  <img class="smallAward" width="100" height="100" src="./img/award.jpg">
+                  <p><strong>Glückwunsch!</strong></p>
               </div>
-              <div class="col-lg-3">
-                  <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <center><strong>Überblick nutzen</strong></center>
-                  </div>
-              </div>
-              <div class="col-lg-3">
-                  <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <center><strong>Erster trade</strong></center>
-                  </div>
-              </div>
-              <div class="col-lg-3">
-                  <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <center><strong>250€ Anlegen</strong></center>
-                  </div>
-              </div>
-              <div class="col-lg-3">
-                  <div class="alert alert-dismissible alert-warning">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <center><strong>Benachrichtigung über verfügbares Geld</strong></center>
-                  </div>
+              <div class="col-lg-10">
+                <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="check1" checked="">
+                      <label class="custom-control-label" for="customCheck1">Konten anbinden</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="check2" checked="">
+                  <label class="custom-control-label" for="customCheck2">Überblick nutzen</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="check3" checked="">
+                  <label class="custom-control-label" for="customCheck1">Erster trade</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="check4" unchecked="">
+                  <label class="custom-control-label" for="customCheck2">Benachrichtigung über verfügbares Geld</label>
+                </div> 
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="check5" checked="">
+                  <label class="custom-control-label" for="customCheck1">250€ Anlegen</label>
+                </div>
               </div>
             </div>
           </div>
@@ -598,7 +594,8 @@
 
                             <script>
                               function weiter(){
-                                console.log("weiter");
+                                $('#congratz').show();
+                                $('html, body').animate({ scrollTop: 0 }, 'fast');
                               }
                               function buy( content2, inter) {
                                 var content = parseInt(document. getElementById(content2).textContent, 10);
