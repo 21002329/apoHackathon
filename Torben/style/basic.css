@@ -6,6 +6,11 @@
     margin-left: auto;
 }
 
+.progress-bar {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 *, ::before, ::after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
