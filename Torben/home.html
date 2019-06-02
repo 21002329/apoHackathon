@@ -100,16 +100,16 @@
 		var l_saldo_monthly = Math.round((getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount)*100)/100;
 		var invest = Math.round(l_saldo_monthly*0.3*100)/100;
 		var l_saldo = account.balance;
-		document.getElementById("asset_buy_text").innerHTML = "Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten gewinnbringen anlegen. Sie haben einen monatlichen Überschuss von " + l_saldo_monthly + " €. Wir würden Ihnen empfehlen davon 30% (" + invest +"€)anzulegen." 
+		document.getElementById("asset_buy_text").innerHTML = "Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten gewinnbringen anlegen. Sie haben einen monatlichen Überschuss von " + l_saldo_monthly + " €. Wir würden Ihnen empfehlen davon 30% (" + invest +"€)anzulegen."
         document.getElementById("moneySet").innerHTML = invest;
 		if ( l_saldo >= 3* l_saldo_monthly ){
-			document.getElementById("only_shares").innerHTML="Ihr freies Kapital übersteigt Ihr Einkommen um das 3-fache. Sie könnten 50% davon (" + Math.round(l_saldo*0.5*100)/100+ "€) in Aktion investieren" 
+			document.getElementById("only_shares").innerHTML="Ihr freies Kapital übersteigt Ihr Einkommen um das 3-fache. Sie könnten 50% davon (" + Math.round(l_saldo*0.5*100)/100+ "€) in Aktion investieren"
 		} else if ( l_saldo >= 2*l_saldo_monthly){
 			document.getElementById("only_shares").innerHTML= "Ihr freies Kapital übersteigt Ihr Einkommen um über 200%. Sie könnten 25% davon (" + Math.round(l_saldo*0.25*100)/100+ "€) in Aktion investieren"
 		} else {
 			document.getElementById("only_shares").innerHTML= "Ihr freies Kapital liegt unter dem  doppeltem Ihres Monatseinkommens. Um ein wenig mehr Sicherheit vor unvorhersehbare Ereignisse zu bekommen sollten Sie ihr frei verfügbares Kapital erhöhen."
 		}
-		
+
 		var avg_doc = Array(docs.header.length).fill(0);
         var itx = 0;
         var iter2 = 0;
@@ -167,7 +167,7 @@
                                                           plot_bgcolor: 'rgba(0,0,0,0)'},
                                                         {showSendToCloud: false});
 
-        
+
         l_saldo = l_saldo.toFixed(2)
         document.getElementById("Acc_saldo").innerHTML = l_saldo;
 
@@ -567,11 +567,11 @@
               <div  class="col-lg-10">
                 <p id = "only_shares"> </p>
 				<p align="left">
-					
+
                      Risk Level 4
                 </p>
 				<p align="left">
-					
+
                      Dies wird Sie nur 2 Stunden Ihrer Zeit benötigen.
                 </p>
                   <p align='right'>
@@ -647,48 +647,54 @@
 
                       <!-- Modal body -->
                       <div class="modal-body container">
-							<div class="row">
-								<div class="row">
-									<div class="col-lg-8 col-sm-6">
-										<h5 id = "moneyText" class="display-5">Hello Annika Pauder! Bitte verteilen Sie Ihre gewählten</h5>
-								<h5 id = "moneySet" class="display-5">300</h5>
-								<h5 id = "moneyText2" class="display-5">€ oder wählen Sie eine der Risiko Varianten aus.</h5>
-									</div>
-	
-									<div class="col-lg-4 col-sm-6">
-										<img class="bannerApoBank" src="./img/banner.png" align="right">
-									</div>
-								</div>
-								<div class="row" >
-									<div class="col-lg-8 col-sm-6">
-										<button id ="own" type="button"  onclick="setAssetNumbers('own')" class="btn btn-primary mb-3">Eigene Auswahl </button>
-										<button id ="low" type="button"  onclick="setAssetNumbers('low')" class="btn btn-primary mb-3">Geringes Risiko </button>
-										<button id ="middle" type="button"  onclick="setAssetNumbers('middle')" class="btn btn-primary mb-3">Moderates Risiko </button>
-										<button id ="high" type="button"  onclick="setAssetNumbers('high')" class="btn btn-primary mb-3">Hohes Risiko </button>
-									</div>
-								</div>
-							 </div>
-                            <div class="row">
-                              <div class="card text-white bg-primary mb-3" style="width: 15rem;">
-                                <div class="card-header">TecDax</div>
-                                <div class="card-body">
-                                  <h4 class="card-title">24,97 €</h4>
-                                  <img class = "assetgraph" src="./img/asset1-d.jpg" align="right">
 
+                              <div class="row">
+
+                                  <div class="col-lg-8 col-sm-6">
+                                          <h5 id = "moneyText" class="display-5">Hello Annika Pauder! Bitte verteilen Sie Ihre gewählten</h5>
+                                      <h5 id = "moneySet" class="display-5">300</h5>
+                                      <h5 id = "moneyText2" class="display-5">€ oder wählen Sie eine der Risiko Varianten aus.</h5>
+                                  </div>
+
+                                  <div class="col-lg-4 col-sm-6">
+                                    <img class="bannerApoBank" src="./img/banner.png" align="right">
+                                  </div>
+                        </div>
+                        <div class="row">
+
+                                <div class="row" >
+                                  <div class="col-lg-8 col-sm-6">
+                                    <button id ="own" type="button"  onclick="setAssetNumbers('own')" class="btn btn-primary mb-3">Eigene Auswahl </button>
+                                    <button id ="low" type="button"  onclick="setAssetNumbers('low')" class="btn btn-primary mb-3">Geringes Risiko </button>
+                                    <button id ="middle" type="button"  onclick="setAssetNumbers('middle')" class="btn btn-primary mb-3">Moderates Risiko </button>
+                                    <button id ="high" type="button"  onclick="setAssetNumbers('high')" class="btn btn-primary mb-3">Hohes Risiko </button>
+                                  </div>
+                                </div>
+                               </div>
+
+                              <div class="row">
+                                <div class="card text-white bg-primary mb-3" style="width: 15rem;">
+                                  <div class="card-header">TecDax</div>
+                                  <div class="card-body">
+                                    <h4 class="card-title">24,97 €</h4>
+
+                                    <img class = "assetgraph" src="./img/asset1-d.jpg" align="right">
+
+                                  </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-2" style="width: 15rem;">
+                                        <img class = "assetgraph" src="./img/asset1-graph.jpg" align="right">
+                                </div>
+                                <div class="btn-group">
+                                  <button id ="down1" type="button"  onclick="sell('content1', '1')" class="btn btn-primary mb-3"><font size="5">-</font></button>
+                                </div>
+                                <h4 id = content1>0</h4>
+                                <div class="btn-group">
+                                  <button id ="up1" type="button"  onclick="buy('content1', '1')" class="btn btn-primary mb-3"><font size="5">+</font></button>
                                 </div>
                               </div>
-                              <div class="col-lg-4 col-sm-2" style="width: 15rem;">
-                                      <img class = "assetgraph" src="./img/asset1-graph.jpg" align="right">
-                              </div>
-                              <div class="btn-group">
-                                <button id ="down1" type="button"  onclick="sell('content1', '1')" class="btn btn-primary mb-3"><font size="5">-</font></button>
-                              </div>
-                              <h4 id = content1>0</h4>
-                              <div class="btn-group">
-                                <button id ="up1" type="button"  onclick="buy('content1', '1')" class="btn btn-primary mb-3"><font size="5">+</font></button>
-                              </div>
 
-                            </div>
+
                             <div class="row">
                               <div class="card text-white bg-primary mb-3" style="width: 15rem;">
                                 <div class="card-header">EURO STOXX</div>
@@ -708,6 +714,7 @@
                                 <button id ="up2" type="button"  onclick="buy('content2', '2')" class="btn btn-primary mb-3"><font size="5">+</font></button>
                               </div>
                             </div>
+
                             <div class="row">
                               <div class="card text-white bg-primary mb-3" style="width: 15rem;">
                                 <div class="card-header">Core DAX</div>
@@ -727,6 +734,7 @@
                                 <button id ="up3" type="button"  onclick="buy('content3', '3')" class="btn btn-primary mb-3"><font size="5">+</font></button>
                               </div>
                             </div>
+
                             <div class="row">
                               <div class="card text-white bg-primary mb-3" style="width: 15rem;">
                                 <div class="card-header">NASDAQ-100</div>
@@ -746,6 +754,7 @@
                                 <button id ="up4" type="button"  onclick="buy('content4', '4')" class="btn btn-primary mb-3"><font size="5">+</font></button>
                               </div>
                             </div>
+
                             <div class="row">
                               <div class="card text-white bg-primary mb-3" style="width: 15rem;">
                                 <div class="card-header">Global Clean Energy</div>
@@ -800,7 +809,7 @@
 										document. getElementById('content5').innerHTML=59   ;
 										document. getElementById('moneySet').innerHTML =Math.round((invest -59* 5.12)*100)/100;
 									}
-									
+
 								}
                               function weiter(){
                                 $('#congratzModal').show();
@@ -832,7 +841,7 @@
                                 chart.update();
                                 $('html, body').animate({ scrollTop: 0 }, 'fast');
                               }
-                              
+
                               function buy( content2, inter) {
                                 var content = parseInt(document. getElementById(content2).textContent, 10);
                                 var money = parseFloat(document. getElementById('moneySet').textContent, 10);
