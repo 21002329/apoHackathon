@@ -6,3 +6,8 @@ function checkInsurence(data,avg){
           x.style.display = 'none';
         }
 }
+
+
+function printAccLevel(acc_level,element){
+   var x = document.getElementById(element).innerHTML = "Level " + acc_level;
+}

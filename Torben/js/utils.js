@@ -15,6 +15,8 @@ var fino_bank_username = "apoHackathon1";
 var account = {};
 var balanceWithForecast = {};
 
+var acc_level = 1;
+
 // ..
 
 function sleep(ms) {
@@ -346,15 +348,7 @@ function getAccountBalancePlotData() {
     return data;
 }
 
-async function finoRefresh() {
-    while (true) {
-        await sleep(fino_refresh_interval_seconds * 1000);
-        finoRefreshToken();
-    }
-};
-
 function updateProgress() {
-    
     var checkboxes = [
         "#check1",
         "#check2",
@@ -373,7 +367,25 @@ function updateProgress() {
     $("#level")
         .css("width", progress+"%")
         .attr("aria-valuenow", progress)
-        .text(progress+"%");    
+        .text(progress+"%");
+
+  console.log(progress);
+
+  if( progress == 100 ) {
+    acc_level = 2;
+    console.log(acc_level);
+
+    var x = document.getElementById('Btn_Level_Up');
+    x.style.display = 'inline';
+  }
 }
+
+async function finoRefresh() {
+    while (true) {
+        await sleep(fino_refresh_interval_seconds * 1000);
+        finoRefreshToken();
+    }
+};
+
 
 finoRefresh();
