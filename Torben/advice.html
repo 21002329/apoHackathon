@@ -18,11 +18,11 @@
       max-height:80%;
     }</style>
 	
-	<style>img.roadstart{
-      max-width:160%;
-      max-height:160%;
+	<style>img.assetgraph{
+      max-width:100%;
+      max-height:100%;
     }</style>
-
+	
 	<!-- https://www.apobank.de/geldanlage-vermoegen/vermoegen/online-depot.html -->
 <title>apoBank Hackathon</title>
  </head>
@@ -43,43 +43,159 @@
     </nav>
 	<div id="main" class="container">
       <div id="banner" class="page-header" style="padding: 20px">
-        <div class="row">
+        
+		<div class="row">
           <div class="col-lg-8 col-sm-6">
-            <h3 class="display-5">Hello Annika Pauder! Hier beginnt deine Reise des Vermögensaufbaus</h3>
+            <h5 id = "moneyText" class="display-5">Hello Annika Pauder! Bitte verteilen Sie Ihre gewählten</h5>
+			<h5 id = "moneySet" class="display-5">300</h5>
+			<h5 id = "moneySet2" class="display-5">€ </h5>
           </div>
-
+			
            <div class="col-lg-4 col-sm-6">
               <img class="bannerApoBank" src="./img/banner.png" align="right">
           </div>
 		</div>
+		
 		<div class="row">
+			<div class="card text-white bg-primary mb-3" style="width: 15rem;">
+				<div class="card-header">TecDax</div>
+				<div class="card-body">
+					<h4 class="card-title">24,97 €</h4>
+					<img class = "assetgraph" src="./img/asset1-d.jpg" align="right">
 
-		  <div class="col-lg-4 col-sm-6">
-              <img id= "roadpic" class="roadstart" src="./img/roadstart.jpg" align="right">
-          </div>
-		  <div id="content" class="col-lg-4 col-sm-6">
-             <h5 class="display-5">Vor jeder Reise muss es leider auch ein wenig Arbeit geben. Im Moment haben Sie noch kein Depot bei uns. Bitte folgen sie dem Link </h5>
-			 <a href="https://www.apobank.de/geldanlage-vermoegen/vermoegen/online-depot.html ">Depot eröffnen</a>
-			 <h5 class="display-5">und klicken Sie dann auf weiter.</h5>
-			 
-          </div>
-		</div>
-		<div class="btn-group">
-			<button id ="wohin" type="button"  onclick="openGeldanlage()" class="btn btn-primary"><font size="5">Wo soll diese Reise hin gehen?</font></button>
-			<button id ="weiter" type="button"  onclick="weiter()" class="btn btn-primary"><font size="5">Weiter</font></button>
-		</div>
-      </div>
-		<script>
-			function openGeldanlage(){
-				window.location.href = "https://www.apobank.de/geldanlage-vermoegen/geldanlage.html";
-			}
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-2" style="width: 15rem;">
+              <img class = "assetgraph" src="./img/asset1-graph.jpg" align="right">
+			</div>
+			<div class="btn-group">
+				<button id ="down1" type="button"  onclick="sell('content1', '1')" class="btn btn-primary mb-3"><font size="5">-</font></button>
+			</div>
 			
+			<div class="col-lg-4 col-sm-2" >
+				<h4 id = content1>0</h4>
+			</div>
+			<div class="btn-group">
+				<button id ="up1" type="button"  onclick="buy('content1', '1')" class="btn btn-primary mb-3"><font size="5">+</font></button>
+			</div>
+			
+		</div>
+		<div class="row">
+			<div class="card text-white bg-primary mb-3" style="width: 15rem;">
+				<div class="card-header">EURO STOXX</div>
+				<div class="card-body">
+					<h4 class="card-title">35,91 €</h4>
+					<img class = "assetgraph" src="./img/asset2-d.jpg" align="right">
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-2" style="width: 15rem;">
+              <img class = "assetgraph" src="./img/asset2-graph.jpg" align="right">
+			</div>
+			<div class="btn-group">
+				<button id ="up2" type="button"  onclick="buy('content1')" class="btn btn-primary mb-3"><font size="5">+</font></button>
+			</div>
+			<h4 id = content1>0</h4>
+			<div class="btn-group">
+				<button id ="down2" type="button"  onclick="sell()" class="btn btn-primary mb-3"><font size="5">-</font></button>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="card text-white bg-primary mb-3" style="width: 15rem;">
+				<div class="card-header">Core DAX</div>
+				<div class="card-body">
+					<h4 class="card-title">100,32 €</h4>
+					<img class = "assetgraph" src="./img/asset3-d.jpg" align="right">
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-2" style="width: 15rem;">
+              <img class = "assetgraph" src="./img/asset3-graph.jpg" align="right">
+			</div>
+			<div class="btn-group">
+			
+				<button id ="up3" type="button"  onclick="buy3()" class="btn btn-primary mb-3"><font size="5">+</font></button>
+			</div>
+			<h4 id = content1>0</h4>
+			<div class="btn-group">
+				<button id ="down3" type="button"  onclick="sell3()" class="btn btn-primary mb-3"><font size="5">-</font></button>
+			</div>			
+		</div>	
+		<div class="row">
+			<div class="card text-white bg-primary mb-3" style="width: 15rem;">
+				<div class="card-header">NASDAQ-100</div>
+				<div class="card-body">
+					<h4 class="card-title">62,14</h4>
+					<img class = "assetgraph" src="./img/asset4-d.jpg" align="right">
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-2" style="width: 15rem;">
+              <img class = "assetgraph" src="./img/asset4-graph.jpg" align="right">
+			</div>
+			<div class="btn-group">
+				<button id ="up4" type="button"  onclick="buy1()" class="btn btn-primary mb-3"><font size="5">+</font></button>
+			</div>
+			<h4 id = content1>0</h4>
+			<div class="btn-group">
+				<button id ="down4" type="button"  onclick="sell1()" class="btn btn-primary mb-3"><font size="5">-</font></button>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="card text-white bg-primary mb-3" style="width: 15rem;">
+				<div class="card-header">Global Clean Energy</div>
+				<div class="card-body">
+					<h4 class="card-title">5,12 €</h4>
+					<img class = "assetgraph" src="./img/asset5-d.jpg" align="right">
+				</div>
+			</div>	
+			<div class="col-lg-4 col-sm-2" style="width: 15rem;">
+              <img class = "assetgraph" src="./img/asset5-graph.jpg" align="right">
+			</div>
+			<div class="btn-group">
+				<button id ="up5" type="button"  onclick="buy1()" class="btn btn-primary mb-3"><font size="5">+</font></button>
+			</div>
+			<h4 id = content1>0</h4>
+			<div class="btn-group">
+				<button id ="down5" type="button"  onclick="sell1()" class="btn btn-primary mb-3"><font size="5">-</font></button>
+			</div>			
+		</div>	
+		<div class="btn-group">
+			<button id ="weiter" type="button"  onclick="weiter()" class="btn btn-primary"><font size="5">Geld Anlegen</font></button>
+		</div>
+		<script>	
 			function weiter(){
 				var content = document. getElementById("content");
 				content. parentNode. removeChild(content);
-				var roadpic = document. getElementById("roadpic");
-				roadpic. parentNode. removeChild(roadpic);
-			
-			}
+				
+			}		
+			function buy( content2, inter) {
+				var content = parseInt(document. getElementById(content2).textContent, 10); 
+				content +=1; 
+				document. getElementById(content2).innerHTML = content; 
+				var money = parseInt(document. getElementById('moneySet').textContent, 10)
+				if (inter == '1'){
+					money -= 24.97;
+				} else if (inter == '2'){
+					money -= 35.91;
+				} else if (inter == '3'){
+					money -= 100.32;
+				} else if (inter == '4'){
+					money -= 62.14;
+				} else if (inter == '5'){
+					money -= 5.12;
+				}
+				document. getElementById('moneySet').innerHTML = money; 
+				document. getElementById('moneyText').innerHTML = 'Sie können noch '
+				document. getElementById('moneyText2').innerHTML = ' € verteilen.'
+			};
+		
+		function sell(content2, inter) {
+			var content = parseInt(document. getElementById(content2).textContent, 10); 
+				content -=1; 
+				document. getElementById(content2).innerHTML = content; 
+		};
+		
+
 		</script>
+      </div>
+		
 	</div>
+	</body>
