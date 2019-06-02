@@ -141,7 +141,7 @@
                                                           plot_bgcolor: 'rgba(0,0,0,0)'},
                                                         {showSendToCloud: false});
 
-        var l_saldo = getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount;
+        var l_saldo = account.balance;
         l_saldo = l_saldo.toFixed(2)
         document.getElementById("Acc_saldo").innerHTML = l_saldo;
 
@@ -290,6 +290,7 @@
                         <p>Level 2</p>
                       </div>
                   </div>
+
                   <div class="row">
                     <div class="col-lg-2">
                         <img class="smallAward" width="100" height="100" src="./img/awardIcon.png">
@@ -316,6 +317,7 @@
                         <label class="custom-control-label" for="check5">250€ Anlegen</label>
                       </div>
                     </div>
+
               </div>
               <!-- Modal footer -->
               <div class="modal-footer">
@@ -652,9 +654,9 @@
                                 //$('html, body').animate({ scrollTop: 0 }, 'fast');
                               }
                               function buy( content2, inter) {
-                                var content = parseInt(document. getElementById(content2).textContent, 10);                         
-                                var money = parseFloat(document. getElementById('moneySet').textContent, 10); 
-								var paiment = 0; 	
+                                var content = parseInt(document. getElementById(content2).textContent, 10);
+                                var money = parseFloat(document. getElementById('moneySet').textContent, 10);
+								var paiment = 0;
 								if (inter == '1'){
 								paiment = 24.97;
 								} else if (inter == '2'){
@@ -666,8 +668,8 @@
 								} else if (inter == '5'){
 								paiment = 5.12;
 								}
-								
-								if (money - paiment >=0){	
+
+								if (money - paiment >=0){
 									money -= paiment
 									content +=1;
 									document. getElementById(content2).innerHTML = content;
