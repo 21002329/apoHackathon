@@ -356,7 +356,7 @@ function getAccountBalancePlotData(investment) {
             });
             data3.push({
                 t: t,
-                y: y - (delta * money),
+                y: (y - (delta * money) > (y - 3*money) ? y - (delta * money) : (y - 3*money)),
             });
             delta += 1;
         }
