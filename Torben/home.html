@@ -779,6 +779,8 @@
 								function setAssetNumbers(text) {
 									var l_saldo_monthly = Math.round((getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount)*100)/100;
 									var invest = Math.round(l_saldo_monthly*0.3*100)/100;
+                  global_vari_investment = invest;
+
 									if (text == 'own' ){
 										document. getElementById('content1').innerHTML= 0
 										document. getElementById('content2').innerHTML=0
@@ -806,14 +808,13 @@
 										document. getElementById('content2').innerHTML=0  ;
 										document. getElementById('content3').innerHTML=0  ;
 										document. getElementById('content4').innerHTML=0  ;
-										document. getElementById('content5').innerHTML=59   ;
+										document. getElementById('content5').innerHTML=59 ;
 										document. getElementById('moneySet').innerHTML =Math.round((invest -59* 5.12)*100)/100;
 									}
-
 								}
                               function weiter(){
                                 $('#congratzModal').show();
-                                var money = parseFloat(document. getElementById('moneySet').textContent, 10);
+                                var money = global_vari_investment - parseFloat(document. getElementById('moneySet').textContent, 10);
                                 var earningsForecast = getAccountBalancePlotData(money).data2;
                                 var losingsForecast = getAccountBalancePlotData(money).data3;
                                 chart.data.datasets.push({

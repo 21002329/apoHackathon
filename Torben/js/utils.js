@@ -1,4 +1,5 @@
 // fino API
+var global_vari_investment = 0;
 
 var user_email = "avaloq122@fino.digital";
 var user_password = "Demo1234!";
