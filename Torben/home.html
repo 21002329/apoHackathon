@@ -601,45 +601,52 @@
                                 console.log("weiter");
                               }
                               function buy( content2, inter) {
-                                var content = parseInt(document. getElementById(content2).textContent, 10);
-                                content +=1;
-                                document. getElementById(content2).innerHTML = content;
-                                var money = parseFloat(document. getElementById('moneySet').textContent, 10)
-                                if (inter == '1'){
-                                  money -= 24.97;
-                                } else if (inter == '2'){
-                                  money -= 35.91;
-                                } else if (inter == '3'){
-                                  money -= 100.32;
-                                } else if (inter == '4'){
-                                  money -= 62.14;
-                                } else if (inter == '5'){
-                                  money -= 5.12;
-                                }
-                                document. getElementById('moneySet').innerHTML = Math.round( money*100)/100;
-                                document. getElementById('moneyText').innerHTML = 'Sie können noch '
-                                document. getElementById('moneyText2').innerHTML = ' € verteilen.'
+                                var content = parseInt(document. getElementById(content2).textContent, 10);                         
+                                var money = parseFloat(document. getElementById('moneySet').textContent, 10); 
+								var paiment = 0; 	
+								if (inter == '1'){
+								paiment = 24.97;
+								} else if (inter == '2'){
+								paiment = 35.91;
+								} else if (inter == '3'){
+								paiment = 100.32;
+								} else if (inter == '4'){
+								paiment = 62.14;
+								} else if (inter == '5'){
+								paiment = 5.12;
+								}
+								
+								if (money - paiment >=0){	
+									money -= paiment
+									content +=1;
+									document. getElementById(content2).innerHTML = content;
+									document. getElementById('moneySet').innerHTML = Math.round( money*100)/100;
+									document. getElementById('moneyText').innerHTML = 'Sie können noch '
+									document. getElementById('moneyText2').innerHTML = ' € verteilen.'
+								}
                               };
 
                             function sell(content2, inter) {
                               var content = parseInt(document. getElementById(content2).textContent, 10);
+							  if (content > 0 ) {
                                 content -=1;
-                                document. getElementById(content2).innerHTML = content;
-                                var money = parseFloat(document. getElementById('moneySet').textContent, 10)
-                                if (inter == '1'){
-                                  money += 24.97;
-                                } else if (inter == '2'){
-                                  money += 35.91;
-                                } else if (inter == '3'){
-                                  money += 100.32;
-                                } else if (inter == '4'){
-                                  money += 62.14;
-                                } else if (inter == '5'){
-                                  money += 5.12;
-                                }
-                                document. getElementById('moneySet').innerHTML = Math.round( money*100)/100;
-                                document. getElementById('moneyText').innerHTML = 'Sie können noch '
-                                document. getElementById('moneyText2').innerHTML = ' € verteilen.'
+									document. getElementById(content2).innerHTML = content;
+									var money = parseFloat(document. getElementById('moneySet').textContent, 10)
+									if (inter == '1'){
+									money += 24.97;
+									} else if (inter == '2'){
+									money += 35.91;
+									} else if (inter == '3'){
+									money += 100.32;
+									} else if (inter == '4'){
+									money += 62.14;
+									} else if (inter == '5'){
+									money += 5.12;
+									}
+									document. getElementById('moneySet').innerHTML = Math.round( money*100)/100;
+									document. getElementById('moneyText').innerHTML = 'Sie können noch '
+									document. getElementById('moneyText2').innerHTML = ' € verteilen.'
+								}
                             };
                             </script>
 
