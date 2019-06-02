@@ -88,9 +88,9 @@
         };
 		var l_saldo_monthly = Math.round((getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount)*100)/100;
 		var invest = Math.round(l_saldo_monthly*0.3*100)/100;
-		document.getElementById("asset_buy_text").innerHTML = "Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten gewinnbringen anlegen. Sie haben einen monatlichen Überschuss von " + l_saldo_monthly + " €. Wir würden Ihnen empfehlen davon 30% (" + invest +"€)anzulegen." 
+		document.getElementById("asset_buy_text").innerHTML = "Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten gewinnbringen anlegen. Sie haben einen monatlichen Überschuss von " + l_saldo_monthly + " €. Wir würden Ihnen empfehlen davon 30% (" + invest +"€)anzulegen."
         document.getElementById("moneySet").innerHTML = invest;
-		
+
 		var avg_doc = Array(docs.header.length).fill(0);
         var itx = 0;
         var iter2 = 0;
@@ -222,6 +222,10 @@
         $('#check3').change(updateProgress);
         $('#check4').change(updateProgress);
         $('#check5').change(updateProgress);
+
+        var x = document.getElementById('loginIMG');
+            x.style.display = 'inline';
+
         $('#loginButton').hide();
         $('#congratzModal').hide();
         $('#main').show();
@@ -249,6 +253,7 @@
         </ul>
 
         <button id="loginButton" class="btn btn-secondary my-2 my-sm-0" type="button" onclick="doSomething()">Login</button>
+            <img id="loginIMG" src="./img/Profilbild_Annika2.png" style="display: none;width:"10px";height:"10px"" />
       </div>
     </nav>
 
@@ -314,7 +319,7 @@
                       <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="check4" unchecked="">
                         <label class="custom-control-label" for="check4">Benachrichtigung über verfügbares Geld</label>
-                      </div> 
+                      </div>
                       <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="check5" checked="">
                         <label class="custom-control-label" for="check5">250€ anlegen</label>
@@ -358,14 +363,14 @@
       <div id="user_action" class="recomm_actions">
       <div class="row">
       <div class="container">
-          <div id="Blog_Recomm" class="alert alert-dismissible alert-primary">
+          <div id="Blog_Recomm" class="alert alert-dismissible alert-success">
             <button type="button" class="close" data-dismiss="alert" onclick="closeRecommendation()">&times;</button>
             <h4 class="alert-heading"></h4>
 
             <div class="row">
-              <div class="col-sm-1">
+              <!-- <div class="col-sm-1">
                 <button id = "firstAdvice" type="button" class="btn btn-primary"><font size="8">&#11146;</font></button>
-              </div>
+              </div> -->
               <div class="col-lg-10">
                 Sie bezahlen mehr für Ihre Versicherungen als die Vergleichsgruppe von Personen mit Ihrem Beruf aus Ihrer Gegend. Klicken Sie auf den Pfeil um einen Termin mit einem unserer Berater einen Termin zu vereinbaren.
               <p align='right'>
