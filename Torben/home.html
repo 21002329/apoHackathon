@@ -141,7 +141,7 @@
                                                           plot_bgcolor: 'rgba(0,0,0,0)'},
                                                         {showSendToCloud: false});
 
-        var l_saldo = getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount;
+        var l_saldo = account.balance;
         l_saldo = l_saldo.toFixed(2)
         document.getElementById("Acc_saldo").innerHTML = l_saldo;
 
@@ -280,7 +280,7 @@
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="check4" unchecked="">
                   <label class="custom-control-label" for="customCheck2">Benachrichtigung über verfügbares Geld</label>
-                </div> 
+                </div>
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="check5" checked="">
                   <label class="custom-control-label" for="customCheck1">250€ Anlegen</label>
@@ -616,9 +616,9 @@
                                 $('html, body').animate({ scrollTop: 0 }, 'fast');
                               }
                               function buy( content2, inter) {
-                                var content = parseInt(document. getElementById(content2).textContent, 10);                         
-                                var money = parseFloat(document. getElementById('moneySet').textContent, 10); 
-								var paiment = 0; 	
+                                var content = parseInt(document. getElementById(content2).textContent, 10);
+                                var money = parseFloat(document. getElementById('moneySet').textContent, 10);
+								var paiment = 0;
 								if (inter == '1'){
 								paiment = 24.97;
 								} else if (inter == '2'){
@@ -630,8 +630,8 @@
 								} else if (inter == '5'){
 								paiment = 5.12;
 								}
-								
-								if (money - paiment >=0){	
+
+								if (money - paiment >=0){
 									money -= paiment
 									content +=1;
 									document. getElementById(content2).innerHTML = content;
