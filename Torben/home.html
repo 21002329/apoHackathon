@@ -29,17 +29,22 @@
       <script src="./js/Chart_utils.js"></script>
 
 
-    <style>img.bannerApoBank{
+    <style>
+      img.bannerApoBank{
       max-width:80%;
       max-height:80%;
-    }</style>
-	  <style>img.assetgraph{
+      }
+
+	    img.assetgraph{
       max-width:100%;
       max-height:100%;
-    }</style>
+      }
+    </style>
+
 
     <!-- own java script stuff -->
     <script type = "text/javascript" src="./js/utils.js"></script>
+    <script type = "text/javascript" src="./js/utils_checks.js"></script>
     <script>
         function closeRecommendation(){
             $('#user_action').hide();
@@ -79,7 +84,7 @@
             [520,180,120,50,652],
             [510,276,210,77,742],
             [310,870,20,70,520],
-            [467,125,0,45,547]]
+            [467,125,0,44,547]]
         };
 
         var avg_doc = Array(docs.header.length).fill(0);
@@ -95,6 +100,9 @@
           iter2 = 0;
           itx += 1;
         }
+
+        // check wheather there are some deviations from the avg customer
+        checkInsurence(data_abs_round,avg_doc);
 
 
         Plotly.newPlot('Expenses', [data],{
@@ -115,7 +123,7 @@
             align: "center",
             line: {width: 0, color: '#FFFFFF'},
             fill: {color: 'rgba(0,0,0,0)'},
-            font: {size: 16, color: "#212529"}
+            font: {size: 18, color: "#212529"}
           },
           cells: {
             values: [data_abs_Expensen.labels,data_round,data_abs_round,avg_doc],
@@ -123,7 +131,7 @@
             line: {color: "#FFFFFF", width: 0},
             fill: {color: [[rowEvenColor,rowOddColor,rowEvenColor,
                       rowOddColor,rowEvenColor,rowOddColor]]},
-            font: {size: 14, color: "#212529"}
+            font: {size: 16, color: "#212529"}
           }
         }]
 
@@ -132,6 +140,12 @@
                                                           paper_bgcolor: 'rgba(0,0,0,0)',
                                                           plot_bgcolor: 'rgba(0,0,0,0)'},
                                                         {showSendToCloud: false});
+
+        var l_saldo = getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount;
+        l_saldo = l_saldo.toFixed(2)
+        document.getElementById("Acc_saldo").innerHTML = l_saldo;
+
+
 
           temp = getAccountBalancePlotData();
 
@@ -295,6 +309,10 @@
                       <div id="Table_Expenses">
                         <!-- Plotly chart will be drawn inside this DIV -->
                       </div>
+
+                      <h3 class="display-5">Kontostand</h3>
+                      <h4 class="display-6">Girokonto Saldo</h4>
+                        <p id="Acc_saldo"></p>
               </div>
               </div>
         </div>
@@ -302,7 +320,7 @@
       </div>
 
 
-      <div id="user_action">
+      <div id="user_action" class="recomm_actions">
       <div class="row">
       <div class="container">
           <div id="Blog_Recomm" class="alert alert-dismissible alert-primary">
