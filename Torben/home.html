@@ -44,6 +44,9 @@
         function closeRecommendation(){
             $('#user_action').hide();
         };
+        function closeCongratz() {
+            $('#congratz').hide();
+        };
     </script>
 
     <script>
@@ -233,6 +236,47 @@
 
            <div class="col-lg-4 col-sm-6">
               <img class="bannerApoBank" src="./img/banner.png" align="right">
+          </div>
+        </div>
+      </div>
+
+      <div id="congratz" class="bs-docs-section">
+        <div class="bs-component">
+          <div class="jumbotron">
+            <button type="button" class="close" data-dismiss="jumbotron" onclick="closeCongratz()">&times;</button>
+            <h2>Glückwunsch!</h2>
+            <div class="row">
+              <div class="col-lg-3">
+                  <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <center><strong>Konten Anbinden</strong></center>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <center><strong>Überblick nutzen</strong></center>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <center><strong>Erster trade</strong></center>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <center><strong>250€ Anlegen</strong></center>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <center><strong>Benachrichtigung über verfügbares Geld</strong></center>
+                  </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -554,9 +598,7 @@
 
                             <script>
                               function weiter(){
-                                var content = document. getElementById("content");
-                                content. parentNode. removeChild(content);
-
+                                console.log("weiter");
                               }
                               function buy( content2, inter) {
                                 var content = parseInt(document. getElementById(content2).textContent, 10);
@@ -604,7 +646,7 @@
                       </div>
                       <!-- Modal footer -->
                       <div class="modal-footer">
-                        <button id ="weiter" type="button"  onclick="weiter()" class="btn btn-primary">Geld Anlegen</button>
+                        <button id ="weiter" type="button"  onclick="weiter()" data-dismiss="modal" class="btn btn-primary">Geld Anlegen</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
 
