@@ -332,20 +332,39 @@ function getSpendingsExpensenTable() {
     return data;
 }
 
-function getAccountBalancePlotData() {
-    var data = [];
+function getAccountBalancePlotData(investment) {
+    var data1 = [];
+    var data2 = [];
+    var data3 = [];
     var t;
     var y;
+    var money = 0;
+    var delta = 0;
+    if (investment != null) {
+        money = investment;
+    }
 
     for(i in balanceWithForecast) {
         y = Number(balanceWithForecast[i].value);
         t = moment(balanceWithForecast[i].date, "YYYY-MM-DD").valueOf();
-        data.push({
+        data1.push({
             t: t,
-            y: y
+            y: y,
         });
+        if (balanceWithForecast[i].forecast) {
+            data2.push({
+                t: t,
+                y: y + (delta * money),
+            });
+            data3.push({
+                t: t,
+                y: (y - (delta * money) > (y - 3*money) ? y - (delta * money) : (y - 3*money)),
+            });
+            delta += 1;
+        }
     }
-    return data;
+
+    return {data1: data1, data2: data2, data3: data3};
 }
 
 function updateProgress() {
