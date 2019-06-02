@@ -50,7 +50,7 @@
             $('#user_action').hide();
         };
         function closeCongratz() {
-            $('#congratz').hide();
+            $('#congratzModal').hide();
         };
     </script>
 
@@ -110,7 +110,10 @@
 
 
         Plotly.newPlot('Expenses', [data],{
-          title: 'Top 5 Expenses',
+          title: {
+              text: '<b>Top 5 Expenses',
+              size: 25
+          },
           width: document.documentElement.clientWidth * 0.27,
           margin:{l: 10,r: 10,b: 10,t: 50,pad: 10},
           paper_bgcolor: 'rgba(0,0,0,0)',
@@ -139,13 +142,13 @@
           }
         }]
 
-        Plotly.plot('Table_Expenses',data_Table_Expenses,{width: document.documentElement.clientWidth * 0.27,
-                                                          margin:{l: 5,r: 5,b: 1,t: 20,pad: 10},
+        Plotly.plot('Table_Expenses',data_Table_Expenses,{width: document.documentElement.clientWidth * 0.25,
+                                                          margin:{l: 5,r: 5,b: 1,t: 120,pad: 10},
                                                           paper_bgcolor: 'rgba(0,0,0,0)',
                                                           plot_bgcolor: 'rgba(0,0,0,0)'},
                                                         {showSendToCloud: false});
 
-        var l_saldo = getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount;
+        var l_saldo = account.balance;
         l_saldo = l_saldo.toFixed(2)
         document.getElementById("Acc_saldo").innerHTML = l_saldo;
 
@@ -215,7 +218,7 @@
 					});
 
         $('#loginButton').hide();
-        $('#congratz').hide();
+        $('#congratzModal').hide();
         $('#main').show();
 
         //window.location.href = "./banking_home.html";
@@ -259,37 +262,75 @@
         </div>
       </div>
 
-      <div id="congratz">
-        <div class="container">
-          <div id="achievements" class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert" onclick="closeCongratz()">&times;</button>
-            <div class="row">
-              <div class="col-lg-2">
-                  <img class="smallAward" width="100" height="100" src="./img/award.jpg">
-                  <p><strong>Glückwunsch!</strong></p>
+
+      <!-- Congratulations Modal -->
+      <div class="modal" id="congratzModal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Glückwunsch!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
-              <div class="col-lg-10">
-                <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="check1" checked="">
-                      <label class="custom-control-label" for="customCheck1">Konten anbinden</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="check2" checked="">
-                  <label class="custom-control-label" for="customCheck2">Überblick nutzen</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="check3" checked="">
-                  <label class="custom-control-label" for="customCheck1">Erster trade</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="check4" unchecked="">
-                  <label class="custom-control-label" for="customCheck2">Benachrichtigung über verfügbares Geld</label>
-                </div> 
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="check5" checked="">
-                  <label class="custom-control-label" for="customCheck1">250€ Anlegen</label>
-                </div>
+
+              <!-- Modal body -->
+              <div class="modal-body container">
+                  <div class="row">
+                      <div class="col-lg-4">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="80"
+                          aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                            80%
+                          </div>
+                        </div>
+                        <span class="glyphicon glyphicon-triangle-right"></span>
+                        <p>Level 1</p>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="20"
+                            aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                              20%
+                          </div>
+                        </div>
+                        <p>Level 2</p>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-2">
+                        <img class="smallAward" width="100" height="100" src="./img/awardIcon.png">
+                    </div>
+                    <div class="col-lg-10">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check1" checked="">
+                        <label class="custom-control-label" for="check1">Konten anbinden</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check2" checked="">
+                        <label class="custom-control-label" for="check2">Überblick nutzen</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check3" checked="">
+                        <label class="custom-control-label" for="check3">Erster trade</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check4" unchecked="">
+                        <label class="custom-control-label" for="check4">Benachrichtigung über verfügbares Geld</label>
+                      </div> 
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check5" checked="">
+                        <label class="custom-control-label" for="check5">250€ Anlegen</label>
+                      </div>
+                    </div>
+
               </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="closeCongratz()" data-dismiss="modal">Close</button>
+              </div>
+
             </div>
           </div>
         </div>
@@ -299,6 +340,8 @@
           <div class="bs-component">
           <div class="jumbotron">
           <h2 class="display-5">Kontostatistiken</h2>
+          <h4 class="display-6">Girokonto Saldo</h4>
+            <p id="Acc_saldo"></p>
             <div class="row">
                 <div class="col-6">
                       <div id="Expenses">
@@ -308,11 +351,7 @@
                 <div class="col-6">
                       <div id="Table_Expenses">
                         <!-- Plotly chart will be drawn inside this DIV -->
-                      </div>
-
-                      <h3 class="display-5">Kontostand</h3>
-                      <h4 class="display-6">Girokonto Saldo</h4>
-                        <p id="Acc_saldo"></p>
+                  </div>
               </div>
               </div>
         </div>
@@ -616,13 +655,13 @@
 
                             <script>
                               function weiter(){
-                                $('#congratz').show();
-                                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                                $('#congratzModal').show();
+                                //$('html, body').animate({ scrollTop: 0 }, 'fast');
                               }
                               function buy( content2, inter) {
-                                var content = parseInt(document. getElementById(content2).textContent, 10);                         
-                                var money = parseFloat(document. getElementById('moneySet').textContent, 10); 
-								var paiment = 0; 	
+                                var content = parseInt(document. getElementById(content2).textContent, 10);
+                                var money = parseFloat(document. getElementById('moneySet').textContent, 10);
+								var paiment = 0;
 								if (inter == '1'){
 								paiment = 24.97;
 								} else if (inter == '2'){
@@ -634,8 +673,8 @@
 								} else if (inter == '5'){
 								paiment = 5.12;
 								}
-								
-								if (money - paiment >=0){	
+
+								if (money - paiment >=0){
 									money -= paiment
 									content +=1;
 									document. getElementById(content2).innerHTML = content;
