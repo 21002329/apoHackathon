@@ -279,7 +279,7 @@ function getTransactionOverview(transactions) {
 
 function getSpendingsPieChartData() {
 
-    var spending = getTransactionOverview(account.transactions).spending;
+    var spending = getTransactionOverview(account_data.transactions).spending;
     var properties = Object.getOwnPropertyNames(spending);
     var totalSpending = spending.amount;
 	var ultimateColors  = [
@@ -307,7 +307,7 @@ function getSpendingsPieChartData() {
 
 function getSpendingsExpensenTable() {
 
-    var spending = getTransactionOverview(account.transactions).spending;
+    var spending = getTransactionOverview(account_data.transactions).spending;
     var properties = Object.getOwnPropertyNames(spending);
     console.log(properties.toString());
 
@@ -345,14 +345,14 @@ function getAccountBalancePlotData(investment) {
         money = investment;
     }
 
-    for(i in balanceWithForecast) {
-        y = Number(balanceWithForecast[i].value);
-        t = moment(balanceWithForecast[i].date, "YYYY-MM-DD").valueOf();
+    for(i in forecast_data) {
+        y = Number(forecast_data[i].value);
+        t = moment(forecast_data[i].date, "YYYY-MM-DD").valueOf();
         data1.push({
             t: t,
             y: y,
         });
-        if (balanceWithForecast[i].forecast) {
+        if (forecast_data[i].forecast) {
             data2.push({
                 t: t,
                 y: y + (delta * money),
@@ -408,4 +408,4 @@ async function finoRefresh() {
 };
 
 
-finoRefresh();
+//finoRefresh();

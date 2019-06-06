@@ -27,6 +27,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
       <script src="./js/Chart.min.js"></script>
       <script src="./js/Chart_utils.js"></script>
+      <script src="./js/data_workaround.js"></script>
       <!-- <script src="./js/plugin.filler.js"></script> -->
 
 
@@ -68,12 +69,15 @@
     <script>
       function doSomething(){
 
-        finoRefreshToken();
 		    var minPerc2Invest = 30;
 		    var maxPercFixedCost = 50;
 
         var data = getSpendingsPieChartData();
         var data_round = data.values;
+
+        console.log('balance: ' + account_data.balance);
+
+
         var x= 0;
         while(x < data_round.length){
             data_round[x] = data_round[x].toFixed(2);
@@ -97,9 +101,9 @@
             [310,870,20,70,520],
             [467,125,0,44,547]]
         };
-		var l_saldo_monthly = Math.round((getTransactionOverview(account.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount)*100)/100;
+		var l_saldo_monthly = Math.round((getTransactionOverview(account_data.transactions).earning.amount - getTransactionOverview(account.transactions).spending.amount)*100)/100;
 		var invest = Math.round(l_saldo_monthly*0.3*100)/100;
-		var l_saldo = account.balance;
+		var l_saldo = account_data.balance;
 		document.getElementById("asset_buy_text").innerHTML = "Mit unserer Hilfe können Sie ihr freies Kapital in nur wenigen Minuten gewinnbringen anlegen. Sie haben einen monatlichen Überschuss von " + l_saldo_monthly + " €. Wir würden Ihnen empfehlen davon 30% (" + invest +"€)anzulegen."
         document.getElementById("moneySet").innerHTML = invest;
 		if ( l_saldo >= 3* l_saldo_monthly ){
